@@ -123,8 +123,39 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  username: 'username',
   email: 'email',
   password: 'password',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  rating: 'rating',
+  purchaseSource: 'purchaseSource',
+  imageUrls: 'imageUrls',
+  status: 'status',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VoteScalarFieldEnum = {
+  value: 'value',
+  userId: 'userId',
+  reviewId: 'reviewId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -139,9 +170,27 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.User_Role = exports.$Enums.User_Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
+exports.Review_Status = exports.$Enums.Review_Status = {
+  PENDING: 'PENDING',
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  UNPUBLISHED: 'UNPUBLISHED'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Category: 'Category',
+  Review: 'Review',
+  Vote: 'Vote'
 };
 
 /**
