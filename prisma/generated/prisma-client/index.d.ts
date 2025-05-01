@@ -3782,10 +3782,12 @@ export namespace Prisma {
 
   export type ReviewAvgAggregateOutputType = {
     rating: number | null
+    price: number | null
   }
 
   export type ReviewSumAggregateOutputType = {
     rating: number | null
+    price: number | null
   }
 
   export type ReviewMinAggregateOutputType = {
@@ -3795,6 +3797,9 @@ export namespace Prisma {
     rating: number | null
     purchaseSource: string | null
     status: $Enums.Review_Status | null
+    isPremium: boolean | null
+    price: number | null
+    reasonToUnpublish: string | null
     userId: string | null
     categoryId: string | null
     createdAt: Date | null
@@ -3808,6 +3813,9 @@ export namespace Prisma {
     rating: number | null
     purchaseSource: string | null
     status: $Enums.Review_Status | null
+    isPremium: boolean | null
+    price: number | null
+    reasonToUnpublish: string | null
     userId: string | null
     categoryId: string | null
     createdAt: Date | null
@@ -3822,6 +3830,9 @@ export namespace Prisma {
     purchaseSource: number
     imageUrls: number
     status: number
+    isPremium: number
+    price: number
+    reasonToUnpublish: number
     userId: number
     categoryId: number
     createdAt: number
@@ -3832,10 +3843,12 @@ export namespace Prisma {
 
   export type ReviewAvgAggregateInputType = {
     rating?: true
+    price?: true
   }
 
   export type ReviewSumAggregateInputType = {
     rating?: true
+    price?: true
   }
 
   export type ReviewMinAggregateInputType = {
@@ -3845,6 +3858,9 @@ export namespace Prisma {
     rating?: true
     purchaseSource?: true
     status?: true
+    isPremium?: true
+    price?: true
+    reasonToUnpublish?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -3858,6 +3874,9 @@ export namespace Prisma {
     rating?: true
     purchaseSource?: true
     status?: true
+    isPremium?: true
+    price?: true
+    reasonToUnpublish?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -3872,6 +3891,9 @@ export namespace Prisma {
     purchaseSource?: true
     imageUrls?: true
     status?: true
+    isPremium?: true
+    price?: true
+    reasonToUnpublish?: true
     userId?: true
     categoryId?: true
     createdAt?: true
@@ -3973,6 +3995,9 @@ export namespace Prisma {
     purchaseSource: string | null
     imageUrls: string[]
     status: $Enums.Review_Status
+    isPremium: boolean
+    price: number | null
+    reasonToUnpublish: string | null
     userId: string
     categoryId: string
     createdAt: Date
@@ -4006,6 +4031,9 @@ export namespace Prisma {
     purchaseSource?: boolean
     imageUrls?: boolean
     status?: boolean
+    isPremium?: boolean
+    price?: boolean
+    reasonToUnpublish?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -4026,6 +4054,9 @@ export namespace Prisma {
     purchaseSource?: boolean
     imageUrls?: boolean
     status?: boolean
+    isPremium?: boolean
+    price?: boolean
+    reasonToUnpublish?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -4042,6 +4073,9 @@ export namespace Prisma {
     purchaseSource?: boolean
     imageUrls?: boolean
     status?: boolean
+    isPremium?: boolean
+    price?: boolean
+    reasonToUnpublish?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
@@ -4058,13 +4092,16 @@ export namespace Prisma {
     purchaseSource?: boolean
     imageUrls?: boolean
     status?: boolean
+    isPremium?: boolean
+    price?: boolean
+    reasonToUnpublish?: boolean
     userId?: boolean
     categoryId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "rating" | "purchaseSource" | "imageUrls" | "status" | "userId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "rating" | "purchaseSource" | "imageUrls" | "status" | "isPremium" | "price" | "reasonToUnpublish" | "userId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -4099,6 +4136,9 @@ export namespace Prisma {
       purchaseSource: string | null
       imageUrls: string[]
       status: $Enums.Review_Status
+      isPremium: boolean
+      price: number | null
+      reasonToUnpublish: string | null
       userId: string
       categoryId: string
       createdAt: Date
@@ -4538,6 +4578,9 @@ export namespace Prisma {
     readonly purchaseSource: FieldRef<"Review", 'String'>
     readonly imageUrls: FieldRef<"Review", 'String[]'>
     readonly status: FieldRef<"Review", 'Review_Status'>
+    readonly isPremium: FieldRef<"Review", 'Boolean'>
+    readonly price: FieldRef<"Review", 'Float'>
+    readonly reasonToUnpublish: FieldRef<"Review", 'String'>
     readonly userId: FieldRef<"Review", 'String'>
     readonly categoryId: FieldRef<"Review", 'String'>
     readonly createdAt: FieldRef<"Review", 'DateTime'>
@@ -8359,6 +8402,9 @@ export namespace Prisma {
     purchaseSource: 'purchaseSource',
     imageUrls: 'imageUrls',
     status: 'status',
+    isPremium: 'isPremium',
+    price: 'price',
+    reasonToUnpublish: 'reasonToUnpublish',
     userId: 'userId',
     categoryId: 'categoryId',
     createdAt: 'createdAt',
@@ -8512,20 +8558,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Payment_Status'
-   */
-  export type EnumPayment_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Payment_Status'>
-    
-
-
-  /**
-   * Reference to a field of type 'Payment_Status[]'
-   */
-  export type ListEnumPayment_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Payment_Status[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -8536,6 +8568,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Payment_Status'
+   */
+  export type EnumPayment_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Payment_Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Payment_Status[]'
+   */
+  export type ListEnumPayment_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Payment_Status[]'>
     
   /**
    * Deep Input Types
@@ -8687,6 +8733,9 @@ export namespace Prisma {
     purchaseSource?: StringNullableFilter<"Review"> | string | null
     imageUrls?: StringNullableListFilter<"Review">
     status?: EnumReview_StatusFilter<"Review"> | $Enums.Review_Status
+    isPremium?: BoolFilter<"Review"> | boolean
+    price?: FloatNullableFilter<"Review"> | number | null
+    reasonToUnpublish?: StringNullableFilter<"Review"> | string | null
     userId?: StringFilter<"Review"> | string
     categoryId?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
@@ -8706,6 +8755,9 @@ export namespace Prisma {
     purchaseSource?: SortOrderInput | SortOrder
     imageUrls?: SortOrder
     status?: SortOrder
+    isPremium?: SortOrder
+    price?: SortOrderInput | SortOrder
+    reasonToUnpublish?: SortOrderInput | SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -8728,6 +8780,9 @@ export namespace Prisma {
     purchaseSource?: StringNullableFilter<"Review"> | string | null
     imageUrls?: StringNullableListFilter<"Review">
     status?: EnumReview_StatusFilter<"Review"> | $Enums.Review_Status
+    isPremium?: BoolFilter<"Review"> | boolean
+    price?: FloatNullableFilter<"Review"> | number | null
+    reasonToUnpublish?: StringNullableFilter<"Review"> | string | null
     userId?: StringFilter<"Review"> | string
     categoryId?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
@@ -8747,6 +8802,9 @@ export namespace Prisma {
     purchaseSource?: SortOrderInput | SortOrder
     imageUrls?: SortOrder
     status?: SortOrder
+    isPremium?: SortOrder
+    price?: SortOrderInput | SortOrder
+    reasonToUnpublish?: SortOrderInput | SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -8769,6 +8827,9 @@ export namespace Prisma {
     purchaseSource?: StringNullableWithAggregatesFilter<"Review"> | string | null
     imageUrls?: StringNullableListFilter<"Review">
     status?: EnumReview_StatusWithAggregatesFilter<"Review"> | $Enums.Review_Status
+    isPremium?: BoolWithAggregatesFilter<"Review"> | boolean
+    price?: FloatNullableWithAggregatesFilter<"Review"> | number | null
+    reasonToUnpublish?: StringNullableWithAggregatesFilter<"Review"> | string | null
     userId?: StringWithAggregatesFilter<"Review"> | string
     categoryId?: StringWithAggregatesFilter<"Review"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
@@ -9133,6 +9194,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -9150,6 +9214,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     categoryId: string
     createdAt?: Date | string
@@ -9167,6 +9234,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -9184,6 +9254,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9201,6 +9274,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     categoryId: string
     createdAt?: Date | string
@@ -9215,6 +9291,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9227,6 +9306,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9649,6 +9731,17 @@ export namespace Prisma {
     not?: NestedEnumReview_StatusFilter<$PrismaModel> | $Enums.Review_Status
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -9672,6 +9765,9 @@ export namespace Prisma {
     purchaseSource?: SortOrder
     imageUrls?: SortOrder
     status?: SortOrder
+    isPremium?: SortOrder
+    price?: SortOrder
+    reasonToUnpublish?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -9680,6 +9776,7 @@ export namespace Prisma {
 
   export type ReviewAvgOrderByAggregateInput = {
     rating?: SortOrder
+    price?: SortOrder
   }
 
   export type ReviewMaxOrderByAggregateInput = {
@@ -9689,6 +9786,9 @@ export namespace Prisma {
     rating?: SortOrder
     purchaseSource?: SortOrder
     status?: SortOrder
+    isPremium?: SortOrder
+    price?: SortOrder
+    reasonToUnpublish?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -9702,6 +9802,9 @@ export namespace Prisma {
     rating?: SortOrder
     purchaseSource?: SortOrder
     status?: SortOrder
+    isPremium?: SortOrder
+    price?: SortOrder
+    reasonToUnpublish?: SortOrder
     userId?: SortOrder
     categoryId?: SortOrder
     createdAt?: SortOrder
@@ -9710,6 +9813,7 @@ export namespace Prisma {
 
   export type ReviewSumOrderByAggregateInput = {
     rating?: SortOrder
+    price?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9754,6 +9858,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumReview_StatusFilter<$PrismaModel>
     _max?: NestedEnumReview_StatusFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type ReviewScalarRelationFilter = {
@@ -10180,6 +10300,14 @@ export namespace Prisma {
     set?: $Enums.Review_Status
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
     create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
     connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
@@ -10486,6 +10614,17 @@ export namespace Prisma {
     not?: NestedEnumReview_StatusFilter<$PrismaModel> | $Enums.Review_Status
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10551,6 +10690,22 @@ export namespace Prisma {
     _max?: NestedEnumReview_StatusFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumPayment_StatusFilter<$PrismaModel = never> = {
     equals?: $Enums.Payment_Status | EnumPayment_StatusFieldRefInput<$PrismaModel>
     in?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
@@ -10576,6 +10731,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutReviewsInput
@@ -10592,6 +10750,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10717,6 +10878,9 @@ export namespace Prisma {
     purchaseSource?: StringNullableFilter<"Review"> | string | null
     imageUrls?: StringNullableListFilter<"Review">
     status?: EnumReview_StatusFilter<"Review"> | $Enums.Review_Status
+    isPremium?: BoolFilter<"Review"> | boolean
+    price?: FloatNullableFilter<"Review"> | number | null
+    reasonToUnpublish?: StringNullableFilter<"Review"> | string | null
     userId?: StringFilter<"Review"> | string
     categoryId?: StringFilter<"Review"> | string
     createdAt?: DateTimeFilter<"Review"> | Date | string
@@ -10816,6 +10980,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -10832,6 +10999,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11155,6 +11325,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -11171,6 +11344,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     categoryId: string
     createdAt?: Date | string
@@ -11242,6 +11418,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -11258,6 +11437,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11307,6 +11489,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -11323,6 +11508,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     categoryId: string
     createdAt?: Date | string
@@ -11394,6 +11582,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -11410,6 +11601,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11426,6 +11620,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
@@ -11442,6 +11639,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     categoryId: string
     createdAt?: Date | string
@@ -11507,6 +11707,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -11523,6 +11726,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11578,6 +11784,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     categoryId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11616,6 +11825,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutReviewsNestedInput
@@ -11632,6 +11844,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11648,6 +11863,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11736,6 +11954,9 @@ export namespace Prisma {
     purchaseSource?: string | null
     imageUrls?: ReviewCreateimageUrlsInput | string[]
     status?: $Enums.Review_Status
+    isPremium?: boolean
+    price?: number | null
+    reasonToUnpublish?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11749,6 +11970,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -11765,6 +11989,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11781,6 +12008,9 @@ export namespace Prisma {
     purchaseSource?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ReviewUpdateimageUrlsInput | string[]
     status?: EnumReview_StatusFieldUpdateOperationsInput | $Enums.Review_Status
+    isPremium?: BoolFieldUpdateOperationsInput | boolean
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    reasonToUnpublish?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -20,7 +20,7 @@ const getAllCategories = catchAsync(async (req, res) => {
     sendResponse(res, {
         statusCode: status.CREATED,
         success: true,
-        message: 'Category created successfully',
+        message: 'All Category fetched successfully',
         data: allCategories,
     });
 });
@@ -31,7 +31,7 @@ const getCategoriesForAdmin = catchAsync(async (req, res) => {
     sendResponse(res, {
         statusCode: status.CREATED,
         success: true,
-        message: 'Category created successfully',
+        message: 'All Category fetched successfully',
         data: allCategories,
     });
 });
