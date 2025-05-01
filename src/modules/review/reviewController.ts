@@ -2,9 +2,11 @@ import status from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { reviewHelper } from './reviewHelper';
-import { reviewService } from './reviewService';
+import { reviewService, UserJWTPayload } from './reviewService';
 
 const createReviewForUser = catchAsync(async (req, res) => {
+    const { userId } = req.user as UserJWTPayload;
+
     let imageUrls;
     if (req.files && req.files.length) {
         imageUrls = await reviewHelper.handleImageUploads(
@@ -14,10 +16,14 @@ const createReviewForUser = catchAsync(async (req, res) => {
 
     const payload = {
         ...req.body,
+        userId,
         imageUrls,
     };
 
-    const newReview = await reviewService.createReviewForUser(payload);
+    const newReview = await reviewService.createReviewForUser(
+        payload,
+        req.user as UserJWTPayload,
+    );
 
     sendResponse(res, {
         statusCode: status.CREATED,

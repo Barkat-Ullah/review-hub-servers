@@ -25,8 +25,6 @@ export const createReviewValidation = z.object({
         .positive('Price must be greater than 0')
         .optional(),
 
-    userId: z.string({ required_error: 'User ID is required' }),
-
     categoryId: z.string({ required_error: 'Category ID is required' }),
 });
 

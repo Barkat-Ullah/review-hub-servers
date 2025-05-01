@@ -1,7 +1,13 @@
-import { Review } from '../../../prisma/generated/prisma-client';
+import { Review, User_Role } from '../../../prisma/generated/prisma-client';
 import prisma from '../../utils/prisma';
 
-const createReviewForUser = async (payload: Review) => {
+export interface UserJWTPayload {
+    role: User_Role;
+    userId: string;
+}
+
+const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
+    const { role } = user || {};
     const newReview = await prisma.review.create({
         data: {
             title: payload.title,
@@ -9,8 +15,9 @@ const createReviewForUser = async (payload: Review) => {
             rating: payload.rating,
             purchaseSource: payload.purchaseSource,
             imageUrls: payload.imageUrls || [],
-            isPremium: false,
-            price: payload.isPremium ? payload.price : null,
+            isPremium: role === User_Role.ADMIN ? payload.isPremium : false,
+            price: role === User_Role.ADMIN ? payload.price : null,
+            status: role === User_Role.ADMIN ? payload.status : 'DRAFT',
             user: {
                 connect: {
                     id: payload.userId,
