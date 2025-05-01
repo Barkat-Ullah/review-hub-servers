@@ -1,6 +1,6 @@
 # Product Review Portal
 
-Develop a **Product Review Portal** that allows users to create accounts, share product reviews with ratings, categorize reviews, and interact with posts through voting and commenting. Admins will review and moderate content to ensure community standards are met. The portal will be built using modern web technologies to ensure scalability, performance, and maintainability.
+The **Product Review Portal** is a modern web application where users can share, browse, and interact with product reviews. It supports user-generated content, voting, commenting, premium reviews, and admin moderation — all powered by a robust and scalable stack using Next.js, Node.js, Prisma, and PostgreSQL.
 
 ---
 
@@ -9,135 +9,120 @@ Develop a **Product Review Portal** that allows users to create accounts, share 
 ### 1\. User Roles
 
 - **User**:
-    - Register and log in to the portal.
-    - Create, edit, and delete their own product reviews.
-    - Categorize reviews (e.g., Gadgets, Clothing, Books, etc.).
-    - Provide a rating (e.g., 1-5 stars) and optional purchase source (e.g., link or store name).
-    - Share positive or negative experiences in reviews.
-    - Vote (upvote/downvote) or unvote on reviews.
-    - Comment on reviews.
-    - Free access to standard reviews
-    - Pay one-time fee to:
-        - View full premium review content
-        - Vote/comment on premium reviews
-    - View payment history in profile
+
+    - Register/login with email and password
+    - Create, edit, and delete product reviews
+      Categorize reviews (e.g., Gadgets, Clothing, Books)
+
+    - Rate products (1–5 stars) and share purchase info
+
+    - Vote (upvote/downvote) and comment on reviews
+
+    - Access free content
+
+    - Purchase and access premium reviews
+
 - **Admin**:
-    - Approve or unpublish user reviews based on community guidelines.
-    - View all reviews.
-    - Moderate comments and remove inappropriate content (optional).
-    - Admin can post premium review.
-    - Set price per premium review
-    - View payment analytics (total earnings, popular premium reviews)
 
-### 2\. Features
+    - Approve, unpublish, or delete reviews
 
-- **Authentication**:
-    - User signup/login using email and password.
-    - Password hashing for security.
-    - JWT-based authentication for session management.
-- **Review Management**:
-    - Users can create reviews with:
-        - Title, description, rating (1-5), category, optional purchase source, and images (optional).
-    - Reviews are submitted as drafts and require admin approval to be published.
-    - Users can edit/delete their unpublished or published reviews (if not yet moderated).
-- **Category System**:
-    - Predefined categories by admin (e.g., Gadgets, Clothing, Books) for organizing reviews.
-    - Users must select a category when submitting a review.
-- **Admin Moderation**:
-    - Admins can view a dashboard of all reviews (pending, published, unpublished).
-    - Approve or unpublish reviews with a reason (visible to the user).
-    - Delete inappropriate comments (optional).
-- **Payment Flow**
-    1. **Admin creates premium review**:
-        - Normal review creation + "Mark as Premium" checkbox
-        - Set price (e.g., $5)
-    2. **User accesses premium review**:
-        - Sees preview (first 100 chars + blurred content)
-        - CTA: _"Unlock full review for $X"_
-        - Redirects to payment gateway (Stripe/PayPal or any other)
-    3. **Post-payment**:
-        - Immediate access to full content
-        - Ability to vote/comment
-        - Receipt confirmation to the user
-- **Voting and Commenting**:
-    - Users can upvote or downvote reviews (one vote per user per review).
-    - Users can remove their vote.
-    - Users can post comments on reviews and reply to existing comments.
-- **Search and Filter**:
-    - Users can search reviews by keyword or filter by name, category, rating, or date.
-- **Responsive Design**:
+    - Moderate comments (optional)
+
+    - Create and mark reviews as premium with custom price
+
+    - View analytics on premium review sales
     - The portal must be fully responsive and accessible on desktop and mobile devices.
-
-### 3\. Pages
-
-- **Home Page**:
-    - Display a welcoming interface with key portal information
-    - Show featured/popular reviews (admin-selected or highest-rated)
-    - Include navigation to all other pages
-    - Visual elements:
-        - Hero section with call-to-action
-        - Preview of latest/popular reviews
-        - Quick access to categories
-        - Basic statistics about the portal (number of reviews, users, etc.)
-- **All Reviews Page Requirements**
-    - Display all published reviews in a list/grid format
-    - Filtering functionality:
-        - By category (Gadgets, Clothing, Books, etc.), rating (1-5 stars), date (newest/oldest first), popularity (most voted)
-    - Search functionality:
-        - Keyword search in review titles/descriptions
-    - Pagination for large result sets
-    - Each review card must show:
-        - Product image (if available)
-        - Title
-        - Rating (visual stars)
-        - Author
-        - Date posted
-        - Vote count
-        - Category badge etc
-- **Review Detail Page**
-- Complete display of a single review including:
-    - Full title
-    - Author information
-    - Publication date
-    - Rating with visual representation
-    - Product category
-    - Purchase source (if provided)
-    - Full review text
-    - Images (if any), etc.
-- Interactive elements:
-    - Voting buttons (upvote/downvote)
-    - Comment section:
-        - Form to add new comment
-        - List of existing comments
-        - Reply functionality (optional)
-- Edit/Delete buttons (visible only to review author)
-- Admin moderation controls (visible only to admins)
-- Related reviews section (same category)
-
----
-
-### **Non-Functional Requirements:**
-
-- **Usability:** Clean, intuitive UI/UX for both users and admins.
-- **Maintainability:** Modular, clean, and well-documented code following RESTful API design principles.
 
 ---
 
 ### **Technology Stack:**
 
 - **Frontend:**
-    - **Next.js** (for server-side rendering and static site generation).
-    - **Tailwind CSS** (for utility-first styling).
+
+    - Next.js – React framework with SSR and SSG
+
+    - Tailwind CSS – Utility-first CSS framework
+
 - **Backend:**
-    - **Node.js** with **Express.js** (for RESTful API).
-    - **Prisma** (for database management).
-- **Database:**
-    - **PostgreSQL** (for relational data storage).
+
+    - Node.js + Express.js – REST API backend
+
+    - Prisma – ORM for PostgreSQL
+
+    - PostgreSQL – Relational database
+
 - **Authentication:**
-    - **JWT** (for session management).
+
+    - JWT (JSON Web Tokens) – Stateless authentication
+
 - **Payment Integration:**
-    - **SSLCommerz** or **ShurjoPay** (for premium subscriptions).
-- **Deployment:**
-    - Vercel, render, ralway for hosting and deployment.
+
+    - SSLCommerz / ShurjoPay – One-time payment for premium reviews
 
 ---
+
+### Scripts
+
+- npm run dev - Start the development server.
+- npm run build - Build the application.
+- npm run lint - Run ESLint to check for code issues.
+- npm run lint:fix - Fixed to some errors automatically.
+
+### Getting Started
+
+#### Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js v20
+- npm
+
+#### Installation
+
+1. Clone the repository:
+
+```js
+git clone https://github.com/MdSaifulIslamRafsan/l2-a9-backend.git
+cd product-review-portal
+```
+
+2. Install dependencies:
+
+```js
+npm install
+```
+
+3. Set up environment variables:
+
+```js
+PORT = 5000;
+DATABASE_URL = your_db_url;
+```
+
+#### Usage
+
+- Run the development server:
+
+```js
+npm run dev
+```
+
+- build for production:
+
+```js
+npm run build
+```
+
+- check the EsLint error:
+
+```js
+npm run lint
+```
+
+- fix the EsLint error:
+
+```js
+npm run lint:fix
+```
+
+### Thank You
