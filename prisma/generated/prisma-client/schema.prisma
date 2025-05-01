@@ -41,13 +41,16 @@ model Category {
 }
 
 model Review {
-  id             String        @id @default(uuid())
-  title          String
-  description    String
-  rating         Int
-  purchaseSource String?
-  imageUrls      String[]
-  status         Review_Status @default(DRAFT)
+  id                String        @id @default(uuid())
+  title             String
+  description       String
+  rating            Int
+  purchaseSource    String?
+  imageUrls         String[]
+  status            Review_Status @default(DRAFT)
+  isPremium         Boolean       @default(false)
+  price             Float?
+  reasonToUnpublish String?
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])

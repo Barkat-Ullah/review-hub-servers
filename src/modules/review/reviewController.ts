@@ -1,10 +1,23 @@
 import status from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
+import { reviewHelper } from './reviewHelper';
 import { reviewService } from './reviewService';
 
 const createReviewForUser = catchAsync(async (req, res) => {
-    const newReview = await reviewService.createReviewForUser(req.body);
+    let imageUrls;
+    if (req.files && req.files.length) {
+        imageUrls = await reviewHelper.handleImageUploads(
+            req.files as Express.Multer.File[],
+        );
+    }
+
+    const payload = {
+        ...req.body,
+        imageUrls,
+    };
+
+    const newReview = await reviewService.createReviewForUser(payload);
 
     sendResponse(res, {
         statusCode: status.CREATED,
