@@ -5,7 +5,10 @@ export const validate =
     (schema: ZodSchema) =>
     (req: Request, res: Response, next: NextFunction) => {
         try {
-            req.body = schema.parse(req.body);
+            const dataToValidate = req.body.data
+                ? JSON.parse(req.body.data)
+                : req.body;
+            req.body = schema.parse(dataToValidate);
             next();
         } catch (error) {
             next(error);

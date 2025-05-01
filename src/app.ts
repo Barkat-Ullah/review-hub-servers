@@ -21,7 +21,7 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hello, World!');
 });
 
-app.use('/api', AllRoutes);
+app.use('/api/v1', AllRoutes);
 
 // Not Found Handler [should be after all routes]
 app.use(notFound);
