@@ -9,12 +9,14 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
+  id       String      @id @default(uuid())
   name     String
-  username String    @unique
-  email    String    @unique
+  username String      @unique
+  email    String      @unique
   password String
-  role     User_Role @default(USER)
+  photoUrl String?
+  status   User_Status @default(ACTIVE)
+  role     User_Role   @default(USER)
 
   reviews Review[]
   votes   Vote[]
@@ -121,6 +123,12 @@ model Payment {
 enum User_Role {
   USER
   ADMIN
+}
+
+enum User_Status {
+  ACTIVE
+  BLOCKED
+  DELETED
 }
 
 enum Review_Status {
