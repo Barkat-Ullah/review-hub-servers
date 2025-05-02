@@ -1,4 +1,6 @@
+import status from 'http-status';
 import { Review, User_Role } from '../../../prisma/generated/prisma-client';
+import AppError from '../../errors/AppError';
 import prisma from '../../utils/prisma';
 
 export interface UserJWTPayload {
@@ -39,7 +41,47 @@ const getAllReviewsFromDB = async () => {
     return reviews;
 };
 
+const updateReview = async (
+    reviewId: string,
+    payload: Partial<Review>,
+    user: UserJWTPayload,
+) => {
+    const review = await prisma.review.findUnique({
+        where: { id: reviewId },
+        include: {
+            user: true,
+        },
+    });
+
+    if (!review) {
+        throw new AppError(status.NOT_FOUND, 'Review not found');
+    }
+
+    const isOwner = review.userId === user.userId;
+    const reviewCreatorRole = review.user.role;
+    const requesterRole = user.role;
+
+    const canEdit =
+        (reviewCreatorRole === 'USER' && isOwner) ||
+        (reviewCreatorRole === 'ADMIN' && requesterRole === 'ADMIN');
+
+    if (!canEdit) {
+        throw new AppError(
+            status.UNAUTHORIZED,
+            'Not authorized to edit this review',
+        );
+    }
+
+    const updatedReview = await prisma.review.update({
+        where: { id: reviewId },
+        data: payload,
+    });
+
+    return updatedReview;
+};
+
 export const reviewService = {
     createReviewForUser,
     getAllReviewsFromDB,
+    updateReview,
 };
