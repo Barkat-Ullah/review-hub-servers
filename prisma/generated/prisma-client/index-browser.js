@@ -126,9 +126,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-  photoUrl: 'photoUrl',
-  status: 'status',
   role: 'role',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -136,6 +135,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -148,6 +148,9 @@ exports.Prisma.ReviewScalarFieldEnum = {
   purchaseSource: 'purchaseSource',
   imageUrls: 'imageUrls',
   status: 'status',
+  isPremium: 'isPremium',
+  price: 'price',
+  reasonToUnpublish: 'reasonToUnpublish',
   userId: 'userId',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
@@ -196,12 +199,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.User_Status = exports.$Enums.User_Status = {
-  ACTIVE: 'ACTIVE',
-  BLOCKED: 'BLOCKED',
-  DELETED: 'DELETED'
-};
-
 exports.User_Role = exports.$Enums.User_Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'

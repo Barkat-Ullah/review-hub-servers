@@ -9,14 +9,13 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  name     String
-  username String    @unique
-  email    String    @unique
-  password String
-  photoUrl String?
-  status     User_Status @default(ACTIVE)
-  role     User_Role @default(USER)
+  id        String    @id @default(uuid())
+  name      String
+  username  String    @unique
+  email     String    @unique
+  password  String
+  role      User_Role @default(USER)
+  isDeleted Boolean   @default(false)
 
   reviews Review[]
   votes   Vote[]
@@ -30,8 +29,9 @@ model User {
 }
 
 model Category {
-  id   String @id @default(uuid())
-  name String @unique
+  id        String  @id @default(uuid())
+  name      String  @unique
+  isDeleted Boolean @default(false)
 
   reviews Review[]
 
@@ -42,13 +42,16 @@ model Category {
 }
 
 model Review {
-  id             String        @id @default(uuid())
-  title          String
-  description    String
-  rating         Int
-  purchaseSource String?
-  imageUrls      String[]
-  status         Review_Status @default(DRAFT)
+  id                String        @id @default(uuid())
+  title             String
+  description       String
+  rating            Int
+  purchaseSource    String?
+  imageUrls         String[]
+  status            Review_Status @default(DRAFT)
+  isPremium         Boolean       @default(false)
+  price             Float?
+  reasonToUnpublish String?
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])
