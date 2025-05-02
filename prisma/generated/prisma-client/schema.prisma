@@ -9,13 +9,15 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  username  String    @unique
-  email     String    @unique
-  password  String
-  role      User_Role @default(USER)
-  isDeleted Boolean   @default(false)
+  id         String      @id @default(uuid())
+  name       String
+  username   String      @unique
+  email      String      @unique
+  password   String
+  profileUrl String?
+  status     User_Status @default(ACTIVE)
+  role       User_Role   @default(USER)
+  isDeleted  Boolean     @default(false)
 
   reviews Review[]
   votes   Vote[]
