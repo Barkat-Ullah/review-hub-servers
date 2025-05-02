@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import status from 'http-status';
 import { Review, User_Role } from '../../../prisma/generated/prisma-client';
 import AppError from '../../errors/AppError';
@@ -37,8 +39,34 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
 };
 
 const getAllReviewsFromDB = async () => {
-    const reviews = await prisma.review.findMany();
-    return reviews;
+    const reviews = await prisma.review.findMany({
+        include: {
+            votes: true,
+            user: {
+                select: {
+                    name: true,
+                    username: true,
+                    email: true,
+                },
+            },
+        },
+    });
+
+    const reviewsWithCounts = reviews.map((review) => {
+        const upvotes = review.votes.filter((v) => v.vote === 'UPVOTE').length;
+        const downvotes = review.votes.filter(
+            (v) => v.vote === 'DOWNVOTE',
+        ).length;
+        const { votes, ...rest } = review;
+
+        return {
+            ...rest,
+            upvotes,
+            downvotes,
+        };
+    });
+
+    return reviewsWithCounts;
 };
 
 const updateReview = async (

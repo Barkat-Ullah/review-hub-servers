@@ -71,7 +71,7 @@ model Review {
 }
 
 model Vote {
-  value Int
+  vote VoteType
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])
@@ -127,6 +127,7 @@ enum User_Role {
   USER
   ADMIN
 }
+
 enum User_Status {
   ACTIVE
   BLOCKED
@@ -144,4 +145,10 @@ enum Payment_Status {
   PENDING
   PAID
   UNPAID
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+  NONE
 }
