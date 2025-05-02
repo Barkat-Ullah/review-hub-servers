@@ -56,6 +56,15 @@ export namespace $Enums {
 export type User_Role = (typeof User_Role)[keyof typeof User_Role]
 
 
+export const User_Status: {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  DELETED: 'DELETED'
+};
+
+export type User_Status = (typeof User_Status)[keyof typeof User_Status]
+
+
 export const Review_Status: {
   PENDING: 'PENDING',
   DRAFT: 'DRAFT',
@@ -79,6 +88,10 @@ export type Payment_Status = (typeof Payment_Status)[keyof typeof Payment_Status
 export type User_Role = $Enums.User_Role
 
 export const User_Role: typeof $Enums.User_Role
+
+export type User_Status = $Enums.User_Status
+
+export const User_Status: typeof $Enums.User_Status
 
 export type Review_Status = $Enums.Review_Status
 

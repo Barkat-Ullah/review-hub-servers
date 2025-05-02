@@ -127,6 +127,11 @@ enum User_Role {
   USER
   ADMIN
 }
+enum User_Status {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
 
 enum Review_Status {
   PENDING
