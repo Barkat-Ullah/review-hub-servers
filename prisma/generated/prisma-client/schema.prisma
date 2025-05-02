@@ -128,6 +128,12 @@ enum User_Role {
   ADMIN
 }
 
+enum User_Status {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
 enum Review_Status {
   PENDING
   DRAFT
