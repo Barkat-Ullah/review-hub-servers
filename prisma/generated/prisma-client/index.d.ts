@@ -7269,13 +7269,23 @@ export namespace Prisma {
 
   export type AggregatePayment = {
     _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
     _min: PaymentMinAggregateOutputType | null
     _max: PaymentMaxAggregateOutputType | null
   }
 
+  export type PaymentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PaymentSumAggregateOutputType = {
+    amount: number | null
+  }
+
   export type PaymentMinAggregateOutputType = {
     id: string | null
-    amount: string | null
+    amount: number | null
     transactionId: string | null
     status: $Enums.Payment_Status | null
     reviewId: string | null
@@ -7286,7 +7296,7 @@ export namespace Prisma {
 
   export type PaymentMaxAggregateOutputType = {
     id: string | null
-    amount: string | null
+    amount: number | null
     transactionId: string | null
     status: $Enums.Payment_Status | null
     reviewId: string | null
@@ -7307,6 +7317,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type PaymentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentSumAggregateInputType = {
+    amount?: true
+  }
 
   export type PaymentMinAggregateInputType = {
     id?: true
@@ -7380,6 +7398,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PaymentMinAggregateInputType
@@ -7410,13 +7440,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PaymentCountAggregateInputType | true
+    _avg?: PaymentAvgAggregateInputType
+    _sum?: PaymentSumAggregateInputType
     _min?: PaymentMinAggregateInputType
     _max?: PaymentMaxAggregateInputType
   }
 
   export type PaymentGroupByOutputType = {
     id: string
-    amount: string
+    amount: number
     transactionId: string
     status: $Enums.Payment_Status
     reviewId: string
@@ -7424,6 +7456,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
     _min: PaymentMinAggregateOutputType | null
     _max: PaymentMaxAggregateOutputType | null
   }
@@ -7514,7 +7548,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      amount: string
+      amount: number
       transactionId: string
       status: $Enums.Payment_Status
       reviewId: string
@@ -7947,7 +7981,7 @@ export namespace Prisma {
    */
   interface PaymentFieldRefs {
     readonly id: FieldRef<"Payment", 'String'>
-    readonly amount: FieldRef<"Payment", 'String'>
+    readonly amount: FieldRef<"Payment", 'Float'>
     readonly transactionId: FieldRef<"Payment", 'String'>
     readonly status: FieldRef<"Payment", 'Payment_Status'>
     readonly reviewId: FieldRef<"Payment", 'String'>
@@ -8984,7 +9018,7 @@ export namespace Prisma {
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
     id?: StringFilter<"Payment"> | string
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -9013,7 +9047,7 @@ export namespace Prisma {
     AND?: PaymentWhereInput | PaymentWhereInput[]
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -9034,8 +9068,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
+    _avg?: PaymentAvgOrderByAggregateInput
     _max?: PaymentMaxOrderByAggregateInput
     _min?: PaymentMinOrderByAggregateInput
+    _sum?: PaymentSumOrderByAggregateInput
   }
 
   export type PaymentScalarWhereWithAggregatesInput = {
@@ -9043,7 +9079,7 @@ export namespace Prisma {
     OR?: PaymentScalarWhereWithAggregatesInput[]
     NOT?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Payment"> | string
-    amount?: StringWithAggregatesFilter<"Payment"> | string
+    amount?: FloatWithAggregatesFilter<"Payment"> | number
     transactionId?: StringWithAggregatesFilter<"Payment"> | string
     status?: EnumPayment_StatusWithAggregatesFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringWithAggregatesFilter<"Payment"> | string
@@ -9458,7 +9494,7 @@ export namespace Prisma {
 
   export type PaymentCreateInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -9469,7 +9505,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -9480,7 +9516,7 @@ export namespace Prisma {
 
   export type PaymentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9491,7 +9527,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -9502,7 +9538,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -9513,7 +9549,7 @@ export namespace Prisma {
 
   export type PaymentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9522,7 +9558,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -9974,6 +10010,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type EnumPayment_StatusFilter<$PrismaModel = never> = {
     equals?: $Enums.Payment_Status | EnumPayment_StatusFieldRefInput<$PrismaModel>
     in?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
@@ -9990,6 +10037,10 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type PaymentMaxOrderByAggregateInput = {
@@ -10012,6 +10063,26 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EnumPayment_StatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -10505,6 +10576,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type EnumPayment_StatusFieldUpdateOperationsInput = {
     set?: $Enums.Payment_Status
   }
@@ -10742,6 +10821,22 @@ export namespace Prisma {
     not?: NestedEnumPayment_StatusFilter<$PrismaModel> | $Enums.Payment_Status
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedEnumPayment_StatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Payment_Status | EnumPayment_StatusFieldRefInput<$PrismaModel>
     in?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
@@ -10852,7 +10947,7 @@ export namespace Prisma {
 
   export type PaymentCreateWithoutUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -10862,7 +10957,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateWithoutUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -10992,7 +11087,7 @@ export namespace Prisma {
     OR?: PaymentScalarWhereInput[]
     NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
     id?: StringFilter<"Payment"> | string
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -11173,7 +11268,7 @@ export namespace Prisma {
 
   export type PaymentCreateWithoutReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -11183,7 +11278,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateWithoutReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     userId: string
@@ -11854,7 +11949,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -11963,7 +12058,7 @@ export namespace Prisma {
 
   export type PaymentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11973,7 +12068,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -11983,7 +12078,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -12078,7 +12173,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     userId: string
@@ -12133,7 +12228,7 @@ export namespace Prisma {
 
   export type PaymentUpdateWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12143,7 +12238,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     userId?: StringFieldUpdateOperationsInput | string
@@ -12153,7 +12248,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     userId?: StringFieldUpdateOperationsInput | string
