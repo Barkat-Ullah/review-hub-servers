@@ -83,6 +83,15 @@ export const Payment_Status: {
 
 export type Payment_Status = (typeof Payment_Status)[keyof typeof Payment_Status]
 
+
+export const VoteType: {
+  UPVOTE: 'UPVOTE',
+  DOWNVOTE: 'DOWNVOTE',
+  NONE: 'NONE'
+};
+
+export type VoteType = (typeof VoteType)[keyof typeof VoteType]
+
 }
 
 export type User_Role = $Enums.User_Role
@@ -100,6 +109,10 @@ export const Review_Status: typeof $Enums.Review_Status
 export type Payment_Status = $Enums.Payment_Status
 
 export const Payment_Status: typeof $Enums.Payment_Status
+
+export type VoteType = $Enums.VoteType
+
+export const VoteType: typeof $Enums.VoteType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -5129,22 +5142,12 @@ export namespace Prisma {
 
   export type AggregateVote = {
     _count: VoteCountAggregateOutputType | null
-    _avg: VoteAvgAggregateOutputType | null
-    _sum: VoteSumAggregateOutputType | null
     _min: VoteMinAggregateOutputType | null
     _max: VoteMaxAggregateOutputType | null
   }
 
-  export type VoteAvgAggregateOutputType = {
-    value: number | null
-  }
-
-  export type VoteSumAggregateOutputType = {
-    value: number | null
-  }
-
   export type VoteMinAggregateOutputType = {
-    value: number | null
+    vote: $Enums.VoteType | null
     userId: string | null
     reviewId: string | null
     createdAt: Date | null
@@ -5152,7 +5155,7 @@ export namespace Prisma {
   }
 
   export type VoteMaxAggregateOutputType = {
-    value: number | null
+    vote: $Enums.VoteType | null
     userId: string | null
     reviewId: string | null
     createdAt: Date | null
@@ -5160,7 +5163,7 @@ export namespace Prisma {
   }
 
   export type VoteCountAggregateOutputType = {
-    value: number
+    vote: number
     userId: number
     reviewId: number
     createdAt: number
@@ -5169,16 +5172,8 @@ export namespace Prisma {
   }
 
 
-  export type VoteAvgAggregateInputType = {
-    value?: true
-  }
-
-  export type VoteSumAggregateInputType = {
-    value?: true
-  }
-
   export type VoteMinAggregateInputType = {
-    value?: true
+    vote?: true
     userId?: true
     reviewId?: true
     createdAt?: true
@@ -5186,7 +5181,7 @@ export namespace Prisma {
   }
 
   export type VoteMaxAggregateInputType = {
-    value?: true
+    vote?: true
     userId?: true
     reviewId?: true
     createdAt?: true
@@ -5194,7 +5189,7 @@ export namespace Prisma {
   }
 
   export type VoteCountAggregateInputType = {
-    value?: true
+    vote?: true
     userId?: true
     reviewId?: true
     createdAt?: true
@@ -5240,18 +5235,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: VoteAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VoteSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: VoteMinAggregateInputType
@@ -5282,21 +5265,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: VoteCountAggregateInputType | true
-    _avg?: VoteAvgAggregateInputType
-    _sum?: VoteSumAggregateInputType
     _min?: VoteMinAggregateInputType
     _max?: VoteMaxAggregateInputType
   }
 
   export type VoteGroupByOutputType = {
-    value: number
+    vote: $Enums.VoteType
     userId: string
     reviewId: string
     createdAt: Date
     updatedAt: Date
     _count: VoteCountAggregateOutputType | null
-    _avg: VoteAvgAggregateOutputType | null
-    _sum: VoteSumAggregateOutputType | null
     _min: VoteMinAggregateOutputType | null
     _max: VoteMaxAggregateOutputType | null
   }
@@ -5316,7 +5295,7 @@ export namespace Prisma {
 
 
   export type VoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    value?: boolean
+    vote?: boolean
     userId?: boolean
     reviewId?: boolean
     createdAt?: boolean
@@ -5326,7 +5305,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    value?: boolean
+    vote?: boolean
     userId?: boolean
     reviewId?: boolean
     createdAt?: boolean
@@ -5336,7 +5315,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    value?: boolean
+    vote?: boolean
     userId?: boolean
     reviewId?: boolean
     createdAt?: boolean
@@ -5346,14 +5325,14 @@ export namespace Prisma {
   }, ExtArgs["result"]["vote"]>
 
   export type VoteSelectScalar = {
-    value?: boolean
+    vote?: boolean
     userId?: boolean
     reviewId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"value" | "userId" | "reviewId" | "createdAt" | "updatedAt", ExtArgs["result"]["vote"]>
+  export type VoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"vote" | "userId" | "reviewId" | "createdAt" | "updatedAt", ExtArgs["result"]["vote"]>
   export type VoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     review?: boolean | ReviewDefaultArgs<ExtArgs>
@@ -5374,7 +5353,7 @@ export namespace Prisma {
       review: Prisma.$ReviewPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      value: number
+      vote: $Enums.VoteType
       userId: string
       reviewId: string
       createdAt: Date
@@ -5462,8 +5441,8 @@ export namespace Prisma {
      * // Get first 10 Votes
      * const votes = await prisma.vote.findMany({ take: 10 })
      * 
-     * // Only select the `value`
-     * const voteWithValueOnly = await prisma.vote.findMany({ select: { value: true } })
+     * // Only select the `userId`
+     * const voteWithUserIdOnly = await prisma.vote.findMany({ select: { userId: true } })
      * 
      */
     findMany<T extends VoteFindManyArgs>(args?: SelectSubset<T, VoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5507,9 +5486,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Votes and only return the `value`
-     * const voteWithValueOnly = await prisma.vote.createManyAndReturn({
-     *   select: { value: true },
+     * // Create many Votes and only return the `userId`
+     * const voteWithUserIdOnly = await prisma.vote.createManyAndReturn({
+     *   select: { userId: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -5598,9 +5577,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Votes and only return the `value`
-     * const voteWithValueOnly = await prisma.vote.updateManyAndReturn({
-     *   select: { value: true },
+     * // Update zero or more Votes and only return the `userId`
+     * const voteWithUserIdOnly = await prisma.vote.updateManyAndReturn({
+     *   select: { userId: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5804,7 +5783,7 @@ export namespace Prisma {
    * Fields of the Vote model
    */
   interface VoteFieldRefs {
-    readonly value: FieldRef<"Vote", 'Int'>
+    readonly vote: FieldRef<"Vote", 'VoteType'>
     readonly userId: FieldRef<"Vote", 'String'>
     readonly reviewId: FieldRef<"Vote", 'String'>
     readonly createdAt: FieldRef<"Vote", 'DateTime'>
@@ -7308,13 +7287,23 @@ export namespace Prisma {
 
   export type AggregatePayment = {
     _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
     _min: PaymentMinAggregateOutputType | null
     _max: PaymentMaxAggregateOutputType | null
   }
 
+  export type PaymentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PaymentSumAggregateOutputType = {
+    amount: number | null
+  }
+
   export type PaymentMinAggregateOutputType = {
     id: string | null
-    amount: string | null
+    amount: number | null
     transactionId: string | null
     status: $Enums.Payment_Status | null
     reviewId: string | null
@@ -7325,7 +7314,7 @@ export namespace Prisma {
 
   export type PaymentMaxAggregateOutputType = {
     id: string | null
-    amount: string | null
+    amount: number | null
     transactionId: string | null
     status: $Enums.Payment_Status | null
     reviewId: string | null
@@ -7346,6 +7335,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type PaymentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentSumAggregateInputType = {
+    amount?: true
+  }
 
   export type PaymentMinAggregateInputType = {
     id?: true
@@ -7419,6 +7416,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PaymentMinAggregateInputType
@@ -7449,13 +7458,15 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PaymentCountAggregateInputType | true
+    _avg?: PaymentAvgAggregateInputType
+    _sum?: PaymentSumAggregateInputType
     _min?: PaymentMinAggregateInputType
     _max?: PaymentMaxAggregateInputType
   }
 
   export type PaymentGroupByOutputType = {
     id: string
-    amount: string
+    amount: number
     transactionId: string
     status: $Enums.Payment_Status
     reviewId: string
@@ -7463,6 +7474,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
     _min: PaymentMinAggregateOutputType | null
     _max: PaymentMaxAggregateOutputType | null
   }
@@ -7553,7 +7566,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      amount: string
+      amount: number
       transactionId: string
       status: $Enums.Payment_Status
       reviewId: string
@@ -7986,7 +7999,7 @@ export namespace Prisma {
    */
   interface PaymentFieldRefs {
     readonly id: FieldRef<"Payment", 'String'>
-    readonly amount: FieldRef<"Payment", 'String'>
+    readonly amount: FieldRef<"Payment", 'Float'>
     readonly transactionId: FieldRef<"Payment", 'String'>
     readonly status: FieldRef<"Payment", 'Payment_Status'>
     readonly reviewId: FieldRef<"Payment", 'String'>
@@ -8470,7 +8483,7 @@ export namespace Prisma {
 
 
   export const VoteScalarFieldEnum: {
-    value: 'value',
+    vote: 'vote',
     userId: 'userId',
     reviewId: 'reviewId',
     createdAt: 'createdAt',
@@ -8637,6 +8650,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'VoteType'
+   */
+  export type EnumVoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VoteType'>
+    
+
+
+  /**
+   * Reference to a field of type 'VoteType[]'
+   */
+  export type ListEnumVoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VoteType[]'>
     
 
 
@@ -8924,7 +8951,7 @@ export namespace Prisma {
     AND?: VoteWhereInput | VoteWhereInput[]
     OR?: VoteWhereInput[]
     NOT?: VoteWhereInput | VoteWhereInput[]
-    value?: IntFilter<"Vote"> | number
+    vote?: EnumVoteTypeFilter<"Vote"> | $Enums.VoteType
     userId?: StringFilter<"Vote"> | string
     reviewId?: StringFilter<"Vote"> | string
     createdAt?: DateTimeFilter<"Vote"> | Date | string
@@ -8934,7 +8961,7 @@ export namespace Prisma {
   }
 
   export type VoteOrderByWithRelationInput = {
-    value?: SortOrder
+    vote?: SortOrder
     userId?: SortOrder
     reviewId?: SortOrder
     createdAt?: SortOrder
@@ -8948,7 +8975,7 @@ export namespace Prisma {
     AND?: VoteWhereInput | VoteWhereInput[]
     OR?: VoteWhereInput[]
     NOT?: VoteWhereInput | VoteWhereInput[]
-    value?: IntFilter<"Vote"> | number
+    vote?: EnumVoteTypeFilter<"Vote"> | $Enums.VoteType
     userId?: StringFilter<"Vote"> | string
     reviewId?: StringFilter<"Vote"> | string
     createdAt?: DateTimeFilter<"Vote"> | Date | string
@@ -8958,23 +8985,21 @@ export namespace Prisma {
   }, "userId_reviewId">
 
   export type VoteOrderByWithAggregationInput = {
-    value?: SortOrder
+    vote?: SortOrder
     userId?: SortOrder
     reviewId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: VoteCountOrderByAggregateInput
-    _avg?: VoteAvgOrderByAggregateInput
     _max?: VoteMaxOrderByAggregateInput
     _min?: VoteMinOrderByAggregateInput
-    _sum?: VoteSumOrderByAggregateInput
   }
 
   export type VoteScalarWhereWithAggregatesInput = {
     AND?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
     OR?: VoteScalarWhereWithAggregatesInput[]
     NOT?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
-    value?: IntWithAggregatesFilter<"Vote"> | number
+    vote?: EnumVoteTypeWithAggregatesFilter<"Vote"> | $Enums.VoteType
     userId?: StringWithAggregatesFilter<"Vote"> | string
     reviewId?: StringWithAggregatesFilter<"Vote"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Vote"> | Date | string
@@ -9049,7 +9074,7 @@ export namespace Prisma {
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
     id?: StringFilter<"Payment"> | string
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -9078,7 +9103,7 @@ export namespace Prisma {
     AND?: PaymentWhereInput | PaymentWhereInput[]
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -9099,8 +9124,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
+    _avg?: PaymentAvgOrderByAggregateInput
     _max?: PaymentMaxOrderByAggregateInput
     _min?: PaymentMinOrderByAggregateInput
+    _sum?: PaymentSumOrderByAggregateInput
   }
 
   export type PaymentScalarWhereWithAggregatesInput = {
@@ -9108,7 +9135,7 @@ export namespace Prisma {
     OR?: PaymentScalarWhereWithAggregatesInput[]
     NOT?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Payment"> | string
-    amount?: StringWithAggregatesFilter<"Payment"> | string
+    amount?: FloatWithAggregatesFilter<"Payment"> | number
     transactionId?: StringWithAggregatesFilter<"Payment"> | string
     status?: EnumPayment_StatusWithAggregatesFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringWithAggregatesFilter<"Payment"> | string
@@ -9421,7 +9448,7 @@ export namespace Prisma {
   }
 
   export type VoteCreateInput = {
-    value: number
+    vote: $Enums.VoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutVotesInput
@@ -9429,7 +9456,7 @@ export namespace Prisma {
   }
 
   export type VoteUncheckedCreateInput = {
-    value: number
+    vote: $Enums.VoteType
     userId: string
     reviewId: string
     createdAt?: Date | string
@@ -9437,7 +9464,7 @@ export namespace Prisma {
   }
 
   export type VoteUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutVotesNestedInput
@@ -9445,7 +9472,7 @@ export namespace Prisma {
   }
 
   export type VoteUncheckedUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     userId?: StringFieldUpdateOperationsInput | string
     reviewId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9453,7 +9480,7 @@ export namespace Prisma {
   }
 
   export type VoteCreateManyInput = {
-    value: number
+    vote: $Enums.VoteType
     userId: string
     reviewId: string
     createdAt?: Date | string
@@ -9461,13 +9488,13 @@ export namespace Prisma {
   }
 
   export type VoteUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VoteUncheckedUpdateManyInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     userId?: StringFieldUpdateOperationsInput | string
     reviewId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9537,7 +9564,7 @@ export namespace Prisma {
 
   export type PaymentCreateInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -9548,7 +9575,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -9559,7 +9586,7 @@ export namespace Prisma {
 
   export type PaymentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9570,7 +9597,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -9581,7 +9608,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -9592,7 +9619,7 @@ export namespace Prisma {
 
   export type PaymentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9601,7 +9628,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -10007,6 +10034,13 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type EnumVoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VoteType | EnumVoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVoteTypeFilter<$PrismaModel> | $Enums.VoteType
+  }
+
   export type ReviewScalarRelationFilter = {
     is?: ReviewWhereInput
     isNot?: ReviewWhereInput
@@ -10018,19 +10052,15 @@ export namespace Prisma {
   }
 
   export type VoteCountOrderByAggregateInput = {
-    value?: SortOrder
+    vote?: SortOrder
     userId?: SortOrder
     reviewId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type VoteAvgOrderByAggregateInput = {
-    value?: SortOrder
-  }
-
   export type VoteMaxOrderByAggregateInput = {
-    value?: SortOrder
+    vote?: SortOrder
     userId?: SortOrder
     reviewId?: SortOrder
     createdAt?: SortOrder
@@ -10038,15 +10068,21 @@ export namespace Prisma {
   }
 
   export type VoteMinOrderByAggregateInput = {
-    value?: SortOrder
+    vote?: SortOrder
     userId?: SortOrder
     reviewId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type VoteSumOrderByAggregateInput = {
-    value?: SortOrder
+  export type EnumVoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VoteType | EnumVoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.VoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumVoteTypeFilter<$PrismaModel>
   }
 
   export type CommentCountOrderByAggregateInput = {
@@ -10076,6 +10112,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type EnumPayment_StatusFilter<$PrismaModel = never> = {
     equals?: $Enums.Payment_Status | EnumPayment_StatusFieldRefInput<$PrismaModel>
     in?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
@@ -10092,6 +10139,10 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type PaymentMaxOrderByAggregateInput = {
@@ -10114,6 +10165,26 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type PaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EnumPayment_StatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -10555,6 +10626,10 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput
   }
 
+  export type EnumVoteTypeFieldUpdateOperationsInput = {
+    set?: $Enums.VoteType
+  }
+
   export type UserUpdateOneRequiredWithoutVotesNestedInput = {
     create?: XOR<UserCreateWithoutVotesInput, UserUncheckedCreateWithoutVotesInput>
     connectOrCreate?: UserCreateOrConnectWithoutVotesInput
@@ -10609,6 +10684,14 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type EnumPayment_StatusFieldUpdateOperationsInput = {
@@ -10858,11 +10941,44 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumVoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VoteType | EnumVoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVoteTypeFilter<$PrismaModel> | $Enums.VoteType
+  }
+
+  export type NestedEnumVoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VoteType | EnumVoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VoteType[] | ListEnumVoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.VoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumVoteTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumPayment_StatusFilter<$PrismaModel = never> = {
     equals?: $Enums.Payment_Status | EnumPayment_StatusFieldRefInput<$PrismaModel>
     in?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.Payment_Status[] | ListEnumPayment_StatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPayment_StatusFilter<$PrismaModel> | $Enums.Payment_Status
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedEnumPayment_StatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -10924,14 +11040,14 @@ export namespace Prisma {
   }
 
   export type VoteCreateWithoutUserInput = {
-    value: number
+    vote: $Enums.VoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     review: ReviewCreateNestedOneWithoutVotesInput
   }
 
   export type VoteUncheckedCreateWithoutUserInput = {
-    value: number
+    vote: $Enums.VoteType
     reviewId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10975,7 +11091,7 @@ export namespace Prisma {
 
   export type PaymentCreateWithoutUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -10985,7 +11101,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateWithoutUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -11059,7 +11175,7 @@ export namespace Prisma {
     AND?: VoteScalarWhereInput | VoteScalarWhereInput[]
     OR?: VoteScalarWhereInput[]
     NOT?: VoteScalarWhereInput | VoteScalarWhereInput[]
-    value?: IntFilter<"Vote"> | number
+    vote?: EnumVoteTypeFilter<"Vote"> | $Enums.VoteType
     userId?: StringFilter<"Vote"> | string
     reviewId?: StringFilter<"Vote"> | string
     createdAt?: DateTimeFilter<"Vote"> | Date | string
@@ -11115,7 +11231,7 @@ export namespace Prisma {
     OR?: PaymentScalarWhereInput[]
     NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
     id?: StringFilter<"Payment"> | string
-    amount?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
     transactionId?: StringFilter<"Payment"> | string
     status?: EnumPayment_StatusFilter<"Payment"> | $Enums.Payment_Status
     reviewId?: StringFilter<"Payment"> | string
@@ -11249,14 +11365,14 @@ export namespace Prisma {
   }
 
   export type VoteCreateWithoutReviewInput = {
-    value: number
+    vote: $Enums.VoteType
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutVotesInput
   }
 
   export type VoteUncheckedCreateWithoutReviewInput = {
-    value: number
+    vote: $Enums.VoteType
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11300,7 +11416,7 @@ export namespace Prisma {
 
   export type PaymentCreateWithoutReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     createdAt?: Date | string
@@ -11310,7 +11426,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedCreateWithoutReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     userId: string
@@ -11993,7 +12109,7 @@ export namespace Prisma {
   }
 
   export type VoteCreateManyUserInput = {
-    value: number
+    vote: $Enums.VoteType
     reviewId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12009,7 +12125,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyUserInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     reviewId: string
@@ -12072,21 +12188,21 @@ export namespace Prisma {
   }
 
   export type VoteUpdateWithoutUserInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     review?: ReviewUpdateOneRequiredWithoutVotesNestedInput
   }
 
   export type VoteUncheckedUpdateWithoutUserInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     reviewId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VoteUncheckedUpdateManyWithoutUserInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     reviewId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12118,7 +12234,7 @@ export namespace Prisma {
 
   export type PaymentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12128,7 +12244,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -12138,7 +12254,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     reviewId?: StringFieldUpdateOperationsInput | string
@@ -12217,7 +12333,7 @@ export namespace Prisma {
   }
 
   export type VoteCreateManyReviewInput = {
-    value: number
+    vote: $Enums.VoteType
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12233,7 +12349,7 @@ export namespace Prisma {
 
   export type PaymentCreateManyReviewInput = {
     id?: string
-    amount: string
+    amount: number
     transactionId: string
     status?: $Enums.Payment_Status
     userId: string
@@ -12242,21 +12358,21 @@ export namespace Prisma {
   }
 
   export type VoteUpdateWithoutReviewInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutVotesNestedInput
   }
 
   export type VoteUncheckedUpdateWithoutReviewInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VoteUncheckedUpdateManyWithoutReviewInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    vote?: EnumVoteTypeFieldUpdateOperationsInput | $Enums.VoteType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12288,7 +12404,7 @@ export namespace Prisma {
 
   export type PaymentUpdateWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12298,7 +12414,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     userId?: StringFieldUpdateOperationsInput | string
@@ -12308,7 +12424,7 @@ export namespace Prisma {
 
   export type PaymentUncheckedUpdateManyWithoutReviewInput = {
     id?: StringFieldUpdateOperationsInput | string
-    amount?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
     transactionId?: StringFieldUpdateOperationsInput | string
     status?: EnumPayment_StatusFieldUpdateOperationsInput | $Enums.Payment_Status
     userId?: StringFieldUpdateOperationsInput | string

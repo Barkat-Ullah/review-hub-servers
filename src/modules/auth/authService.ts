@@ -11,7 +11,7 @@ const createUser = async (payload: User) => {
             email: payload.email,
         },
     });
-
+// console.log("isUserExist",isUserExist)
 
     if (isUserExist) {
         throw new Error('User Already Exist');
@@ -28,7 +28,7 @@ const createUser = async (payload: User) => {
         password: hashPassword,
     };
 
-
+// console.log(userData)
     const result = await prisma.user.create({
         data: {
             ...userData,
@@ -42,6 +42,7 @@ const createUser = async (payload: User) => {
             status: true,
         },
     });
+    console.log("result",result)
     return result;
 };
 

@@ -16,5 +16,11 @@ router.post(
     reviewController.createReviewForUser,
 );
 router.get('/', reviewController.getAllReviews);
+router.put(
+    '/:reviewId',
+    upload.array('imageUrls'),
+    auth(User_Role.USER, User_Role.ADMIN),
+    validate(reviewValidation.updateReview),
+);
 
 export const reviewRoutes = router;

@@ -5,7 +5,7 @@ import status from "http-status";
 import sendResponse from "../../utils/sendResponse";
 
 const createUser: RequestHandler = catchAsync(async (req,res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const result = await UserService.createUser(req.body);
 
     sendResponse(res, {
