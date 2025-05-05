@@ -1,16 +1,19 @@
 import { Router } from 'express';
-import { authRoutes } from '../modules/auth/authRoute';
+import { AdminRoutes } from '../modules/admin/admin.routes';
+import { AuthRoutes } from '../modules/auth/authRoute';
 import { categoryRoutes } from '../modules/category/categoryRoute';
+import { commentRoutes } from '../modules/comment/commentRoute';
 import { reviewRoutes } from '../modules/review/reviewRoute';
 import { userRoutes } from '../modules/user/userRoute';
 import { PaymentRoutes } from '../modules/payment/payment.route';
+import { voteRoutes } from '../modules/vote/voteRoute';
 
 const router = Router();
 
 const moduleRoutes = [
     {
         path: '/auth',
-        route: authRoutes,
+        route: AuthRoutes,
     },
     {
         path: '/users',
@@ -27,6 +30,18 @@ const moduleRoutes = [
     {
         path: '/payment',
         route: PaymentRoutes,
+    },
+    {
+        path: '/votes',
+        route: voteRoutes,
+    },
+    {
+        path: '/comments',
+        route: commentRoutes,
+    },
+    {
+        path: '/admin/dashboard-overview',
+        route: AdminRoutes,
     },
 ];
 

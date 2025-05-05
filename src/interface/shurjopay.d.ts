@@ -73,6 +73,7 @@ declare module 'shurjopay' {
     }
 
     export interface VerificationResponse {
+        sp_txn_id: any;
         id: number; // Unique identification
         order_id: string; // shurjoPay payment ID used for verification
         currency: string; // Currency in which the payment was made

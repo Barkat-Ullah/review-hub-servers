@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createReviewValidation = z.object({
+const createReviewValidation = z.object({
     title: z.string({ required_error: 'Title is required' }),
 
     description: z
@@ -28,6 +28,9 @@ export const createReviewValidation = z.object({
     categoryId: z.string({ required_error: 'Category ID is required' }),
 });
 
+const updateReview = createReviewValidation.partial();
+
 export const reviewValidation = {
     createReviewValidation,
+    updateReview,
 };

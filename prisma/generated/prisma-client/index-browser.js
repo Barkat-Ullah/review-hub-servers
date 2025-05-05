@@ -164,7 +164,7 @@ exports.Prisma.ReviewScalarFieldEnum = {
 };
 
 exports.Prisma.VoteScalarFieldEnum = {
-  value: 'value',
+  vote: 'vote',
   userId: 'userId',
   reviewId: 'reviewId',
   createdAt: 'createdAt',
@@ -189,6 +189,7 @@ exports.Prisma.PaymentScalarFieldEnum = {
   sp_message: 'sp_message',
   method: 'method',
   date_time: 'date_time',
+  transactionStatus: 'transactionStatus',
   status: 'status',
   reviewId: 'reviewId',
   userId: 'userId',
@@ -220,6 +221,12 @@ exports.Review_Status = exports.$Enums.Review_Status = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
   UNPUBLISHED: 'UNPUBLISHED'
+};
+
+exports.VoteType = exports.$Enums.VoteType = {
+  UPVOTE: 'UPVOTE',
+  DOWNVOTE: 'DOWNVOTE',
+  NONE: 'NONE'
 };
 
 exports.Payment_Status = exports.$Enums.Payment_Status = {

@@ -57,7 +57,7 @@ model Review {
   isPremium         Boolean       @default(false)
   price             Float?
   reasonToUnpublish String?
-  premiumPrice      Int?
+  premiumPrice      Float?
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])
@@ -77,7 +77,7 @@ model Review {
 }
 
 model Vote {
-  value Int
+  vote VoteType
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])
@@ -111,15 +111,16 @@ model Comment {
 }
 
 model Payment {
-  id            String         @id @default(uuid())
-  amount        Int
-  transactionId String?
-  bank_status   String?
-  sp_code       String?
-  sp_message    String?
-  method        String?
-  date_time     String?
-  status        Payment_Status @default(PENDING)
+  id                String         @id @default(uuid())
+  amount            Float
+  transactionId     String?
+  bank_status       String?
+  sp_code           String?
+  sp_message        String?
+  method            String?
+  date_time         String?
+  transactionStatus String?
+  status            Payment_Status @default(PENDING)
 
   // Relations
   review   Review @relation(fields: [reviewId], references: [id])
@@ -140,6 +141,12 @@ enum User_Role {
   ADMIN
 }
 
+enum User_Status {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
 enum Review_Status {
   PENDING
   DRAFT
@@ -151,4 +158,10 @@ enum Payment_Status {
   PENDING
   PAID
   UNPAID
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+  NONE
 }
