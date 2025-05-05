@@ -4,7 +4,11 @@ import sendResponse from '../../utils/sendResponse';
 import { commentService } from './commentService';
 
 const createComment = catchAsync(async (req, res) => {
-    const newComment = await commentService.createComment(req.body);
+    const { userId } = req.user;
+    const newComment = await commentService.createComment({
+        ...req.body,
+        userId,
+    });
 
     return sendResponse(res, {
         statusCode: status.CREATED,
