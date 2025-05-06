@@ -233,7 +233,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\level-2-projects\\l2-a9-backend\\prisma\\generated\\prisma-client",
+      "value": "C:\\Users\\DELL\\Desktop\\projects\\l2-a9-backend\\prisma\\generated\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -247,7 +247,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\level-2-projects\\l2-a9-backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\DELL\\Desktop\\projects\\l2-a9-backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -265,7 +265,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:barkat@10@localhost:5432/reviewPortal?schema=public"
+        "value": "postgresql://postgres:anna+setu@localhost:5432/productReviewPortal?schema=public"
       }
     }
   },
