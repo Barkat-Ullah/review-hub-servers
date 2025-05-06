@@ -37,9 +37,8 @@ const createUser = async (payload: User) => {
             id: true,
             name: true,
             email: true,
-            profileUrl: true,
             role: true,
-            status: true,
+           
         },
     });
     console.log("result",result)
