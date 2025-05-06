@@ -1578,16 +1578,11 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
-<<<<<<< HEAD
-    profileUrl: string | null
-    status: $Enums.User_Status | null
-=======
     phone: string | null
     address: string | null
     city: string | null
     state: string | null
     postcode: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role: $Enums.User_Role | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -1600,16 +1595,11 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
-<<<<<<< HEAD
-    profileUrl: string | null
-    status: $Enums.User_Status | null
-=======
     phone: string | null
     address: string | null
     city: string | null
     state: string | null
     postcode: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role: $Enums.User_Role | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -1622,16 +1612,11 @@ export namespace Prisma {
     username: number
     email: number
     password: number
-<<<<<<< HEAD
-    profileUrl: number
-    status: number
-=======
     phone: number
     address: number
     city: number
     state: number
     postcode: number
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role: number
     isDeleted: number
     createdAt: number
@@ -1646,16 +1631,11 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
-<<<<<<< HEAD
-    profileUrl?: true
-    status?: true
-=======
     phone?: true
     address?: true
     city?: true
     state?: true
     postcode?: true
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: true
     isDeleted?: true
     createdAt?: true
@@ -1668,16 +1648,11 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
-<<<<<<< HEAD
-    profileUrl?: true
-    status?: true
-=======
     phone?: true
     address?: true
     city?: true
     state?: true
     postcode?: true
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: true
     isDeleted?: true
     createdAt?: true
@@ -1690,16 +1665,11 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
-<<<<<<< HEAD
-    profileUrl?: true
-    status?: true
-=======
     phone?: true
     address?: true
     city?: true
     state?: true
     postcode?: true
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: true
     isDeleted?: true
     createdAt?: true
@@ -1785,16 +1755,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl: string | null
-    status: $Enums.User_Status
-=======
     phone: string | null
     address: string | null
     city: string | null
     state: string | null
     postcode: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role: $Enums.User_Role
     isDeleted: boolean
     createdAt: Date
@@ -1824,16 +1789,11 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
-<<<<<<< HEAD
-    profileUrl?: boolean
-    status?: boolean
-=======
     phone?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     postcode?: boolean
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -1851,16 +1811,11 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
-<<<<<<< HEAD
-    profileUrl?: boolean
-    status?: boolean
-=======
     phone?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     postcode?: boolean
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -1873,16 +1828,11 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
-<<<<<<< HEAD
-    profileUrl?: boolean
-    status?: boolean
-=======
     phone?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     postcode?: boolean
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -1895,27 +1845,18 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
-<<<<<<< HEAD
-    profileUrl?: boolean
-    status?: boolean
-=======
     phone?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     postcode?: boolean
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-<<<<<<< HEAD
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "profileUrl" | "status" | "role" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
-=======
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "password" | "phone" | "address" | "city" | "state" | "postcode" | "role" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     votes?: boolean | User$votesArgs<ExtArgs>
@@ -1940,16 +1881,11 @@ export namespace Prisma {
       username: string
       email: string
       password: string
-<<<<<<< HEAD
-      profileUrl: string | null
-      status: $Enums.User_Status
-=======
       phone: string | null
       address: string | null
       city: string | null
       state: string | null
       postcode: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
       role: $Enums.User_Role
       isDeleted: boolean
       createdAt: Date
@@ -2386,16 +2322,11 @@ export namespace Prisma {
     readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-<<<<<<< HEAD
-    readonly profileUrl: FieldRef<"User", 'String'>
-    readonly status: FieldRef<"User", 'User_Status'>
-=======
     readonly phone: FieldRef<"User", 'String'>
     readonly address: FieldRef<"User", 'String'>
     readonly city: FieldRef<"User", 'String'>
     readonly state: FieldRef<"User", 'String'>
     readonly postcode: FieldRef<"User", 'String'>
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     readonly role: FieldRef<"User", 'User_Role'>
     readonly isDeleted: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -8744,16 +8675,11 @@ export namespace Prisma {
     username: 'username',
     email: 'email',
     password: 'password',
-<<<<<<< HEAD
-    profileUrl: 'profileUrl',
-    status: 'status',
-=======
     phone: 'phone',
     address: 'address',
     city: 'city',
     state: 'state',
     postcode: 'postcode',
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role: 'role',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
@@ -8883,20 +8809,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'User_Status'
-   */
-  export type EnumUser_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'User_Status'>
-    
-
-
-  /**
-   * Reference to a field of type 'User_Status[]'
-   */
-  export type ListEnumUser_StatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'User_Status[]'>
-    
-
-
-  /**
    * Reference to a field of type 'User_Role'
    */
   export type EnumUser_RoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'User_Role'>
@@ -9013,16 +8925,11 @@ export namespace Prisma {
     username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-<<<<<<< HEAD
-    profileUrl?: StringNullableFilter<"User"> | string | null
-    status?: EnumUser_StatusFilter<"User"> | $Enums.User_Status
-=======
     phone?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     state?: StringNullableFilter<"User"> | string | null
     postcode?: StringNullableFilter<"User"> | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFilter<"User"> | $Enums.User_Role
     isDeleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -9039,16 +8946,11 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
-<<<<<<< HEAD
-    profileUrl?: SortOrderInput | SortOrder
-    status?: SortOrder
-=======
     phone?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     state?: SortOrderInput | SortOrder
     postcode?: SortOrderInput | SortOrder
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -9068,16 +8970,11 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-<<<<<<< HEAD
-    profileUrl?: StringNullableFilter<"User"> | string | null
-    status?: EnumUser_StatusFilter<"User"> | $Enums.User_Status
-=======
     phone?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     state?: StringNullableFilter<"User"> | string | null
     postcode?: StringNullableFilter<"User"> | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFilter<"User"> | $Enums.User_Role
     isDeleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -9094,16 +8991,11 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
-<<<<<<< HEAD
-    profileUrl?: SortOrderInput | SortOrder
-    status?: SortOrder
-=======
     phone?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     state?: SortOrderInput | SortOrder
     postcode?: SortOrderInput | SortOrder
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -9122,16 +9014,11 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-<<<<<<< HEAD
-    profileUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
-    status?: EnumUser_StatusWithAggregatesFilter<"User"> | $Enums.User_Status
-=======
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     address?: StringNullableWithAggregatesFilter<"User"> | string | null
     city?: StringNullableWithAggregatesFilter<"User"> | string | null
     state?: StringNullableWithAggregatesFilter<"User"> | string | null
     postcode?: StringNullableWithAggregatesFilter<"User"> | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleWithAggregatesFilter<"User"> | $Enums.User_Role
     isDeleted?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -9557,16 +9444,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -9583,16 +9465,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -9609,16 +9486,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9635,16 +9507,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9661,16 +9528,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -9683,16 +9545,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9705,16 +9562,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10189,16 +10041,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-<<<<<<< HEAD
-  export type EnumUser_StatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.User_Status | EnumUser_StatusFieldRefInput<$PrismaModel>
-    in?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumUser_StatusFilter<$PrismaModel> | $Enums.User_Status
-  }
-
-=======
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type EnumUser_RoleFilter<$PrismaModel = never> = {
     equals?: $Enums.User_Role | EnumUser_RoleFieldRefInput<$PrismaModel>
     in?: $Enums.User_Role[] | ListEnumUser_RoleFieldRefInput<$PrismaModel>
@@ -10273,16 +10115,11 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
-<<<<<<< HEAD
-    profileUrl?: SortOrder
-    status?: SortOrder
-=======
     phone?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     postcode?: SortOrder
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -10295,16 +10132,11 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
-<<<<<<< HEAD
-    profileUrl?: SortOrder
-    status?: SortOrder
-=======
     phone?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     postcode?: SortOrder
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -10317,16 +10149,11 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
-<<<<<<< HEAD
-    profileUrl?: SortOrder
-    status?: SortOrder
-=======
     phone?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     postcode?: SortOrder
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -10369,19 +10196,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-<<<<<<< HEAD
-  export type EnumUser_StatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.User_Status | EnumUser_StatusFieldRefInput<$PrismaModel>
-    in?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumUser_StatusWithAggregatesFilter<$PrismaModel> | $Enums.User_Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumUser_StatusFilter<$PrismaModel>
-    _max?: NestedEnumUser_StatusFilter<$PrismaModel>
-  }
-
-=======
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type EnumUser_RoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.User_Role | EnumUser_RoleFieldRefInput<$PrismaModel>
     in?: $Enums.User_Role[] | ListEnumUser_RoleFieldRefInput<$PrismaModel>
@@ -10849,13 +10663,6 @@ export namespace Prisma {
     set?: string | null
   }
 
-<<<<<<< HEAD
-  export type EnumUser_StatusFieldUpdateOperationsInput = {
-    set?: $Enums.User_Status
-  }
-
-=======
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type EnumUser_RoleFieldUpdateOperationsInput = {
     set?: $Enums.User_Role
   }
@@ -11391,16 +11198,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-<<<<<<< HEAD
-  export type NestedEnumUser_StatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.User_Status | EnumUser_StatusFieldRefInput<$PrismaModel>
-    in?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumUser_StatusFilter<$PrismaModel> | $Enums.User_Status
-  }
-
-=======
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type NestedEnumUser_RoleFilter<$PrismaModel = never> = {
     equals?: $Enums.User_Role | EnumUser_RoleFieldRefInput<$PrismaModel>
     in?: $Enums.User_Role[] | ListEnumUser_RoleFieldRefInput<$PrismaModel>
@@ -11480,19 +11277,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-<<<<<<< HEAD
-  export type NestedEnumUser_StatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.User_Status | EnumUser_StatusFieldRefInput<$PrismaModel>
-    in?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.User_Status[] | ListEnumUser_StatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumUser_StatusWithAggregatesFilter<$PrismaModel> | $Enums.User_Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumUser_StatusFilter<$PrismaModel>
-    _max?: NestedEnumUser_StatusFilter<$PrismaModel>
-  }
-
-=======
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   export type NestedEnumUser_RoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.User_Role | EnumUser_RoleFieldRefInput<$PrismaModel>
     in?: $Enums.User_Role[] | ListEnumUser_RoleFieldRefInput<$PrismaModel>
@@ -11993,16 +11777,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12018,16 +11797,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12176,16 +11950,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12201,16 +11970,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12301,16 +12065,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12326,16 +12085,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12412,16 +12166,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12437,16 +12186,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12568,16 +12312,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12593,16 +12332,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12726,16 +12460,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12751,16 +12480,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12872,16 +12596,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12897,16 +12616,11 @@ export namespace Prisma {
     username: string
     email: string
     password: string
-<<<<<<< HEAD
-    profileUrl?: string | null
-    status?: $Enums.User_Status
-=======
     phone?: string | null
     address?: string | null
     city?: string | null
     state?: string | null
     postcode?: string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: $Enums.User_Role
     isDeleted?: boolean
     createdAt?: Date | string
@@ -12989,16 +12703,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13014,16 +12723,11 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
-    profileUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumUser_StatusFieldUpdateOperationsInput | $Enums.User_Status
-=======
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     state?: NullableStringFieldUpdateOperationsInput | string | null
     postcode?: NullableStringFieldUpdateOperationsInput | string | null
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
     role?: EnumUser_RoleFieldUpdateOperationsInput | $Enums.User_Role
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

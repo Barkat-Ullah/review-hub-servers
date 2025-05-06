@@ -126,16 +126,11 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-<<<<<<< HEAD
-  profileUrl: 'profileUrl',
-  status: 'status',
-=======
   phone: 'phone',
   address: 'address',
   city: 'city',
   state: 'state',
   postcode: 'postcode',
->>>>>>> 895931f337d48202d42c91945abb73c2909565b4
   role: 'role',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
@@ -217,12 +212,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.User_Status = exports.$Enums.User_Status = {
-  ACTIVE: 'ACTIVE',
-  BLOCKED: 'BLOCKED',
-  DELETED: 'DELETED'
-};
-
 exports.User_Role = exports.$Enums.User_Role = {
   USER: 'USER',
   ADMIN: 'ADMIN'
