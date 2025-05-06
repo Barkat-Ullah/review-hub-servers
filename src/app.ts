@@ -23,6 +23,11 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/v1', AllRoutes);
 
+//seed user & review
+// seedUser();
+// seedReviews();
+// seedCategories();
+
 // Not Found Handler [should be after all routes]
 app.use(notFound);
 
