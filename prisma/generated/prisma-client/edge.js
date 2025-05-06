@@ -221,7 +221,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\PendingProjects\\product-review-portal\\prisma\\generated\\prisma-client",
+      "value": "/home/user/projects/practice/l2-a9-backend/prisma/generated/prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -230,12 +230,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\PendingProjects\\product-review-portal\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/user/projects/practice/l2-a9-backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -253,7 +253,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://shakiqur:shake75@098@localhost:5432/productReviewPortal?schema=public"
+        "value": "postgresql://postgres:123456@localhost:5432/productReviewPortal?schema=public"
       }
     }
   },
