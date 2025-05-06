@@ -59,10 +59,13 @@ const getAllReviewsFromDB = async () => {
         ).length;
         const { votes, ...rest } = review;
 
+        const netVotes = upvotes - downvotes;
+
         return {
             ...rest,
             upvotes,
             downvotes,
+            netVotes,
         };
     });
 
