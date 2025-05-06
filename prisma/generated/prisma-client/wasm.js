@@ -174,6 +174,7 @@ exports.Prisma.VoteScalarFieldEnum = {
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  parentId: 'parentId',
   userId: 'userId',
   reviewId: 'reviewId',
   createdAt: 'createdAt',
