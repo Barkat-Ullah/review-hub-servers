@@ -10,12 +10,23 @@ import { adminService } from "./admin.service";
     sendResponse(res, {
         statusCode: 200,
         success: true,
-        message: "Dashboard overview fetched successfully",
+        message: "Dashboard overview data fetched successfully",
         data: result,
     });
  });
 
+ const getPopularPremiumReviews = catchAsync(async (req, res) => {
+    const result = await adminService.getPopularPremiumReviewsFromDb();
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Popular premium reviews data fetched successfully",
+        data: result,
+    });
+ });
 
  export const adminController = {
         getDashboardOverview,
+        getPopularPremiumReviews
  }
