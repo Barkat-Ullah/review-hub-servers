@@ -14,6 +14,11 @@ model User {
   username  String    @unique
   email     String    @unique
   password  String
+  phone     String?   @default("N/A")
+  address   String?   @default("N/A")
+  city      String?   @default("N/A")
+  state     String?   @default("N/A")
+  postcode  String?   @default("N/A")
   role      User_Role @default(USER)
   isDeleted Boolean   @default(false)
 
@@ -52,6 +57,7 @@ model Review {
   isPremium         Boolean       @default(false)
   price             Float?
   reasonToUnpublish String?
+  premiumPrice      Float?
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])
@@ -110,10 +116,16 @@ model Comment {
 }
 
 model Payment {
-  id            String         @id @default(uuid())
-  amount        Float
-  transactionId String
-  status        Payment_Status @default(PENDING)
+  id                String         @id @default(uuid())
+  amount            Float
+  transactionId     String?
+  bank_status       String?
+  sp_code           String?
+  sp_message        String?
+  method            String?
+  date_time         String?
+  transactionStatus String?
+  status            Payment_Status @default(PENDING)
 
   // Relations
   review   Review @relation(fields: [reviewId], references: [id])
@@ -125,6 +137,7 @@ model Payment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([userId, reviewId])
   @@map("payments")
 }
 
