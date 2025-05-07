@@ -44,9 +44,12 @@ const getAllReviewsFromDB = async () => {
             votes: true,
             user: {
                 select: {
+                    id: true,
                     name: true,
-                    username: true,
+                    profileUrl: true,
                     email: true,
+                    username: true,
+                    role: true,
                 },
             },
         },
@@ -70,6 +73,32 @@ const getAllReviewsFromDB = async () => {
     });
 
     return reviewsWithCounts;
+};
+
+const getReviewById = async (reviewId: string) => {
+    const review = await prisma.review.findUnique({
+        where: {
+            id: reviewId,
+        },
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    profileUrl: true,
+                    email: true,
+                    username: true,
+                    role: true,
+                },
+            },
+        },
+    });
+
+    if (!review) {
+        throw new AppError(status.NOT_FOUND, 'Review not found');
+    }
+
+    return review;
 };
 
 const updateReview = async (
@@ -114,5 +143,6 @@ const updateReview = async (
 export const reviewService = {
     createReviewForUser,
     getAllReviewsFromDB,
+    getReviewById,
     updateReview,
 };

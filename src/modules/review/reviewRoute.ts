@@ -16,6 +16,7 @@ router.post(
     reviewController.createReviewForUser,
 );
 router.get('/', reviewController.getAllReviews);
+router.get('/:reviewId', reviewController.getReviewById);
 router.put(
     '/:reviewId',
     upload.array('imageUrls'),
