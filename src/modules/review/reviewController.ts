@@ -74,9 +74,13 @@ const updateReview = catchAsync(async (req, res) => {
 });
 
 const getReviewById = catchAsync(async (req, res) => {
-    const { reviewId } = req.params;
+    const token =
+        req.headers['authorization']?.split(' ')[1] ||
+        req?.headers?.authorization;
 
-    const review = await reviewService.getReviewById(reviewId);
+    const { reviewId } = req.params;    
+
+    const review = await reviewService.getReviewById(reviewId, token);
     sendResponse(res, {
         statusCode: status.OK,
         success: true,

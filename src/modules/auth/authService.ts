@@ -1,9 +1,9 @@
-import { User, User_Status } from '../../../prisma/generated/prisma-client';
+import bcrypt from 'bcrypt';
+import { Secret } from 'jsonwebtoken';
+import { User } from '../../../prisma/generated/prisma-client';
 import { config } from '../../config/config';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
 import prisma from '../../utils/prisma';
-import bcrypt from 'bcrypt';
-import { Secret } from "jsonwebtoken";
 
 const createUser = async (payload: User) => {
     const isUserExist = await prisma.user.findUnique({
@@ -11,7 +11,7 @@ const createUser = async (payload: User) => {
             email: payload.email,
         },
     });
-// console.log("isUserExist",isUserExist)
+    // console.log("isUserExist",isUserExist)
 
     if (isUserExist) {
         throw new Error('User Already Exist');
@@ -28,7 +28,7 @@ const createUser = async (payload: User) => {
         password: hashPassword,
     };
 
-// console.log(userData)
+    // console.log(userData)
     const result = await prisma.user.create({
         data: {
             ...userData,
@@ -38,60 +38,61 @@ const createUser = async (payload: User) => {
             name: true,
             email: true,
             role: true,
-           
         },
     });
-    console.log("result",result)
+    console.log('result', result);
     return result;
 };
 
 const loginUser = async (payload: { email: string; password: string }) => {
     const userData = await prisma.user.findUnique({
-      where: {
-        email: payload.email,
-        status: User_Status.ACTIVE,
-      },
+        where: {
+            email: payload.email,
+            // status: User_Status.ACTIVE,
+            isDeleted: false,
+        },
     });
     // console.log(userData);
     if (!userData) {
-      throw new Error("User not found..");
+        throw new Error('User not found..');
     }
     const isCorrectPassword: boolean = await bcrypt.compare(
-      payload.password,
-      userData.password
+        payload.password,
+        userData.password,
     );
-  
+
     // console.log(isCorrectPassword);
-  
+
     if (!isCorrectPassword) {
-      throw new Error("Your Password is incorrect..");
+        throw new Error('Your Password is incorrect..');
     }
-  
+
     const accessToken = jwtHelpers.generateToken(
-      {
-        email: userData.email,
-        role: userData.role,
-      },
-      config.ACCESS_TOKEN_SECRET as string,
-      config.ACCESS_TOKEN_EXPIRY as string
+        {
+            email: userData.email,
+            role: userData.role,
+            userId: userData.id,
+        },
+        config.ACCESS_TOKEN_SECRET as string,
+        config.ACCESS_TOKEN_EXPIRY as string,
     );
-  
+
     const refreshToken = jwtHelpers.generateToken(
-      {
-        email: userData.email,
-        role: userData.role,
-      },
-      config.REFRESH_TOKEN_SECRET as Secret,
-      config.REFRESH_TOKEN_EXPIRY as string
+        {
+            email: userData.email,
+            role: userData.role,
+            userId: userData.id,
+        },
+        config.REFRESH_TOKEN_SECRET as Secret,
+        config.REFRESH_TOKEN_EXPIRY as string,
     );
     return {
-      accessToken,
-      refreshToken,
+        accessToken,
+        refreshToken,
     };
-  };
-  
+};
 
 export const UserService = {
     createUser,
-    loginUser
+    loginUser,
 };

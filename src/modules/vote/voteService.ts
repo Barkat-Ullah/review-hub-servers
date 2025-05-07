@@ -9,6 +9,17 @@ interface IVotePayload {
 }
 
 const voteOnReview = async (userId: string, payload: IVotePayload) => {
+    const isReviewExists = await prisma.review.findUnique({
+        where: {
+            id: payload.reviewId,
+            status: 'PUBLISHED',
+        },
+    });
+
+    if (!isReviewExists) {
+        throw new AppError(status.NOT_FOUND, 'Review is not found');
+    }
+
     const existingVote = await prisma.vote.findUnique({
         where: {
             userId_reviewId: {

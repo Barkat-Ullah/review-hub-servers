@@ -2,8 +2,11 @@
 /* eslint-disable no-unused-vars */
 import status from 'http-status';
 import { Review, User_Role } from '../../../prisma/generated/prisma-client';
+import { config } from '../../config/config';
 import AppError from '../../errors/AppError';
+import { jwtHelpers } from '../../helpers/jwtHelpers';
 import prisma from '../../utils/prisma';
+import { reviewHelper } from './reviewHelper';
 
 export interface UserJWTPayload {
     role: User_Role;
@@ -40,7 +43,17 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
 
 const getAllReviewsFromDB = async () => {
     const reviews = await prisma.review.findMany({
-        include: {
+        select: {
+            id: true,
+            title: true,
+            category: true,
+            imageUrls: true,
+            rating: true,
+            status: true,
+            price: true,
+            isPremium: true,
+            createdAt: true,
+            updatedAt: true,
             votes: true,
             user: {
                 select: {
@@ -75,7 +88,7 @@ const getAllReviewsFromDB = async () => {
     return reviewsWithCounts;
 };
 
-const getReviewById = async (reviewId: string) => {
+const getReviewById = async (reviewId: string, token: string | undefined) => {
     const review = await prisma.review.findUnique({
         where: {
             id: reviewId,
@@ -91,6 +104,11 @@ const getReviewById = async (reviewId: string) => {
                     role: true,
                 },
             },
+            category: {
+                select: {
+                    name: true,
+                },
+            },
         },
     });
 
@@ -98,7 +116,38 @@ const getReviewById = async (reviewId: string) => {
         throw new AppError(status.NOT_FOUND, 'Review not found');
     }
 
-    return review;
+    const isPremiumReview = review.isPremium;
+
+    if (token && isPremiumReview) {
+        const { userId, role } = jwtHelpers.verifyToken(
+            token,
+            config.ACCESS_TOKEN_SECRET as string,
+        );
+
+        if (userId) {
+            const { content, isLocked, preview, review } =
+                await reviewHelper.checkReviewAccess({
+                    userId,
+                    reviewId,
+                });
+
+            return {
+                ...review,
+                isLocked,
+                preview,
+                description: content,
+            };
+        }
+    }
+
+    return {
+        ...review,
+        isLocked: review.isPremium,
+        description: review.isPremium
+            ? review.description.slice(0, 100)
+            : review.description,
+        preview: review.description.slice(0, 100),
+    };
 };
 
 const updateReview = async (
