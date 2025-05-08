@@ -48,6 +48,8 @@ const getAllReviewsFromDB = async () => {
             title: true,
             category: true,
             imageUrls: true,
+            description: true,
+            reasonToUnpublish: true,
             rating: true,
             status: true,
             price: true,
@@ -188,10 +190,77 @@ const updateReview = async (
 
     return updatedReview;
 };
+const approveReview = async (reviewId: string, user: UserJWTPayload) => {
+    // if (user.role !== User_Role.ADMIN) {
+    //   throw new AppError(
+    //     status.UNAUTHORIZED,
+    //     'Only admins can approve reviews'
+    //   );
+    // }
+
+    const review = await prisma.review.findUnique({
+        where: { id: reviewId },
+    });
+
+    if (!review) {
+        throw new AppError(status.NOT_FOUND, 'Review not found');
+    }
+
+    if (review.status === 'PUBLISHED') {
+        throw new AppError(status.BAD_REQUEST, 'Review is already published');
+    }
+
+    const updatedReview = await prisma.review.update({
+        where: { id: reviewId },
+        data: {
+            status: 'PUBLISHED',
+            reasonToUnpublish: null,
+        },
+    });
+
+    return updatedReview;
+};
+
+const rejectReview = async (
+    reviewId: string,
+    reason: string,
+    user: UserJWTPayload,
+) => {
+    // if (user.role !== User_Role.ADMIN) {
+    //   throw new AppError(
+    //     status.UNAUTHORIZED,
+    //     'Only admins can reject reviews'
+    //   );
+    // }
+
+    const review = await prisma.review.findUnique({
+        where: { id: reviewId },
+    });
+
+    if (!review) {
+        throw new AppError(status.NOT_FOUND, 'Review not found');
+    }
+
+    if (review.status === 'UNPUBLISHED') {
+        throw new AppError(status.BAD_REQUEST, 'Review is already unpublished');
+    }
+
+    const updatedReview = await prisma.review.update({
+        where: { id: reviewId },
+        data: {
+            status: 'UNPUBLISHED',
+            reasonToUnpublish: reason,
+        },
+    });
+
+    return updatedReview;
+};
 
 export const reviewService = {
     createReviewForUser,
     getAllReviewsFromDB,
     getReviewById,
     updateReview,
+    approveReview,
+    rejectReview,
 };
