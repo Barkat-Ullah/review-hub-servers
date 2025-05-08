@@ -109,12 +109,25 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
                     name: true,
                 },
             },
+            votes: true,
         },
     });
 
     if (!review) {
         throw new AppError(status.NOT_FOUND, 'Review not found');
     }
+
+    const upvotes = review.votes.filter((v) => v.vote === 'UPVOTE').length;
+    const downvotes = review.votes.filter((v) => v.vote === 'DOWNVOTE').length;
+    const { votes, ...rest } = review;
+    const netVotes = upvotes - downvotes;
+
+    const reviewInfo = {
+        ...rest,
+        upvotes,
+        downvotes,
+        netVotes,
+    };
 
     const isPremiumReview = review.isPremium;
 
@@ -125,14 +138,14 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
         );
 
         if (userId) {
-            const { content, isLocked, preview, review } =
+            const { content, isLocked, preview } =
                 await reviewHelper.checkReviewAccess({
                     userId,
                     reviewId,
                 });
 
             return {
-                ...review,
+                ...reviewInfo,
                 isLocked,
                 preview,
                 description: content,
@@ -141,7 +154,7 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
     }
 
     return {
-        ...review,
+        ...reviewInfo,
         isLocked: review.isPremium,
         description: review.isPremium
             ? review.description.slice(0, 100)
