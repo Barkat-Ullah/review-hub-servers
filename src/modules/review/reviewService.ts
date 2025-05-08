@@ -84,10 +84,14 @@ const getAllReviewsFromDB = async () => {
         ).length;
         const { votes, ...rest } = review;
 
-        return {
-            ...rest,
+        const voteInfo: TVoteInfo = {
             upvotes,
             downvotes,
+        };
+
+        return {
+            ...rest,
+            voteInfo,
         };
     });
 
