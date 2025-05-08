@@ -30,7 +30,11 @@ const createReviewValidation = z.object({
 
 const updateReview = createReviewValidation.partial();
 
+const rejectReview = z.object({
+    reason: z.string().min(10, 'Rejection reason must be at least 10 characters')
+  });
 export const reviewValidation = {
     createReviewValidation,
     updateReview,
+    rejectReview
 };

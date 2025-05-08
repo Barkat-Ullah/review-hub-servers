@@ -89,9 +89,44 @@ const getReviewById = catchAsync(async (req, res) => {
     });
 });
 
+const approveReview = catchAsync(async (req, res) => {
+    const { reviewId } = req.params;
+    
+    const approvedReview = await reviewService.approveReview(
+      reviewId,
+      req.user as UserJWTPayload
+    );
+  
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: 'Review approved successfully',
+      data: approvedReview,
+    });
+  });
+  
+  const rejectReview = catchAsync(async (req, res) => {
+    const { reviewId } = req.params;
+    const { reason } = req.body;
+  
+    const rejectedReview = await reviewService.rejectReview(
+      reviewId,
+      reason,
+      req.user as UserJWTPayload
+    );
+  
+    sendResponse(res, {
+      statusCode: status.OK,
+      success: true,
+      message: 'Review rejected successfully',
+      data: rejectedReview,
+    });
+  });
 export const reviewController = {
     createReviewForUser,
     getAllReviews,
     updateReview,
     getReviewById,
+    approveReview,
+    rejectReview
 };
