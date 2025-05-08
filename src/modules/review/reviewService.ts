@@ -13,6 +13,13 @@ export interface UserJWTPayload {
     userId: string;
 }
 
+type TVoteInfo = {
+    isDownVote?: boolean;
+    isUpVote?: boolean;
+    upvotes: number;
+    downvotes: number;
+};
+
 const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
     const { role } = user || {};
     const newReview = await prisma.review.create({
@@ -77,13 +84,10 @@ const getAllReviewsFromDB = async () => {
         ).length;
         const { votes, ...rest } = review;
 
-        const netVotes = upvotes - downvotes;
-
         return {
             ...rest,
             upvotes,
             downvotes,
-            netVotes,
         };
     });
 
@@ -121,25 +125,29 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
 
     const upvotes = review.votes.filter((v) => v.vote === 'UPVOTE').length;
     const downvotes = review.votes.filter((v) => v.vote === 'DOWNVOTE').length;
-    const { votes, ...rest } = review;
-    const netVotes = upvotes - downvotes;
+    const { votes, ...reviewWithoutVotes } = review;
 
-    const reviewInfo = {
-        ...rest,
+    const voteInfo: TVoteInfo = {
         upvotes,
         downvotes,
-        netVotes,
+        isDownVote: false,
+        isUpVote: false,
     };
-
     const isPremiumReview = review.isPremium;
 
-    if (token && isPremiumReview) {
+    if (token) {
         const { userId, role } = jwtHelpers.verifyToken(
             token,
             config.ACCESS_TOKEN_SECRET as string,
         );
 
-        if (userId) {
+        const hasVote = review.votes.find((r) => r.userId === review.userId);
+        if (hasVote) {
+            voteInfo.isDownVote = hasVote.vote === 'DOWNVOTE';
+            voteInfo.isUpVote = hasVote.vote === 'UPVOTE';
+        }
+
+        if (isPremiumReview && userId) {
             const { content, isLocked, preview } =
                 await reviewHelper.checkReviewAccess({
                     userId,
@@ -147,21 +155,23 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
                 });
 
             return {
-                ...reviewInfo,
+                ...reviewWithoutVotes,
                 isLocked,
                 preview,
                 description: content,
+                voteInfo,
             };
         }
     }
 
     return {
-        ...reviewInfo,
+        ...reviewWithoutVotes,
         isLocked: review.isPremium,
         description: review.isPremium
             ? review.description.slice(0, 100)
             : review.description,
         preview: review.description.slice(0, 100),
+        voteInfo,
     };
 };
 
