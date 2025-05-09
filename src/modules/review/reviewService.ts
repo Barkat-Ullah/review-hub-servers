@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import status from 'http-status';
-import { Review, User_Role } from '../../../prisma/generated/prisma-client';
+import {
+    Prisma,
+    Review,
+    User_Role,
+} from '../../../prisma/generated/prisma-client';
 import { config } from '../../config/config';
 import AppError from '../../errors/AppError';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
@@ -12,6 +16,15 @@ export interface UserJWTPayload {
     role: User_Role;
     userId: string;
 }
+
+export type TReviewQuery = {
+    rating?: string;
+    category?: string;
+    searchTerm?: string;
+    sortBy?: 'newest' | 'oldest' | 'mostPopular';
+    page?: string;
+    limit?: string;
+};
 
 type TVoteInfo = {
     isDownVote?: boolean;
@@ -48,34 +61,78 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
     return newReview;
 };
 
-const getAllReviewsFromDB = async () => {
-    const reviews = await prisma.review.findMany({
-        select: {
-            id: true,
-            title: true,
-            category: true,
-            imageUrls: true,
-            description: true,
-            reasonToUnpublish: true,
-            rating: true,
-            status: true,
-            price: true,
-            isPremium: true,
-            createdAt: true,
-            updatedAt: true,
-            votes: true,
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    profileUrl: true,
-                    email: true,
-                    username: true,
-                    role: true,
+const getAllReviewsFromDB = async (query: TReviewQuery) => {
+    const {
+        rating,
+        category,
+        searchTerm,
+        sortBy = 'newest',
+        page = 1,
+        limit = 12,
+    } = query;
+
+    const filters: Prisma.ReviewWhereInput = {};
+    let orderBy: Prisma.ReviewOrderByWithRelationInput = { createdAt: 'desc' };
+
+    if (rating) filters.rating = Number(rating);
+    if (category) {
+        filters.category = {
+            name: {
+                equals: category,
+                mode: 'insensitive',
+            },
+        };
+    }
+    if (searchTerm) {
+        filters.OR = [
+            { title: { contains: searchTerm, mode: 'insensitive' } },
+            { description: { contains: searchTerm, mode: 'insensitive' } },
+        ];
+    }
+
+    if (sortBy === 'oldest') {
+        orderBy = { createdAt: 'asc' };
+    } else if (sortBy === 'mostPopular') {
+        orderBy = { votes: { _count: 'desc' } };
+    }
+
+    const skip = (Number(page) - 1) * Number(limit);
+    const take = Number(limit);
+
+    const [total, reviews] = await Promise.all([
+        prisma.review.count({ where: filters }),
+        prisma.review.findMany({
+            where: filters,
+            orderBy,
+            skip,
+            take,
+            select: {
+                id: true,
+                title: true,
+                category: true,
+                imageUrls: true,
+                description: true,
+                reasonToUnpublish: true,
+                rating: true,
+                status: true,
+                price: true,
+                isPremium: true,
+                createdAt: true,
+                updatedAt: true,
+                votes: true,
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        profileUrl: true,
+                        email: true,
+                        username: true,
+                        role: true,
+                    },
                 },
             },
-        },
-    });
+        }),
+    ]);
 
     const reviewsWithCounts = reviews.map((review) => {
         const upvotes = review.votes.filter((v) => v.vote === 'UPVOTE').length;
@@ -95,7 +152,18 @@ const getAllReviewsFromDB = async () => {
         };
     });
 
-    return reviewsWithCounts;
+    const totalPages = Math.ceil(total / Number(limit));
+    const currentPage = Math.min(Number(page), totalPages || 1);
+
+    return {
+        meta: {
+            total,
+            page: currentPage,
+            limit: Number(limit),
+            totalPages,
+        },
+        data: reviewsWithCounts,
+    };
 };
 
 const getReviewById = async (reviewId: string, token: string | undefined) => {
@@ -120,6 +188,12 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
                 },
             },
             votes: true,
+            Comment: true,
+            _count: {
+                select: {
+                    Comment: true,
+                },
+            },
         },
     });
 
@@ -129,7 +203,7 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
 
     const upvotes = review.votes.filter((v) => v.vote === 'UPVOTE').length;
     const downvotes = review.votes.filter((v) => v.vote === 'DOWNVOTE').length;
-    const { votes, ...reviewWithoutVotes } = review;
+    const { votes, Comment, _count, ...reviewWithoutUnnecessary } = review;
 
     const voteInfo: TVoteInfo = {
         upvotes,
@@ -159,23 +233,25 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
                 });
 
             return {
-                ...reviewWithoutVotes,
+                ...reviewWithoutUnnecessary,
                 isLocked,
                 preview,
                 description: content,
                 voteInfo,
+                commentCount: review._count.Comment,
             };
         }
     }
 
     return {
-        ...reviewWithoutVotes,
+        ...reviewWithoutUnnecessary,
         isLocked: review.isPremium,
         description: review.isPremium
             ? review.description.slice(0, 100)
             : review.description,
         preview: review.description.slice(0, 100),
         voteInfo,
+        commentCount: review._count.Comment,
     };
 };
 

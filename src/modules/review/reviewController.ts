@@ -34,7 +34,7 @@ const createReviewForUser = catchAsync(async (req, res) => {
 });
 
 const getAllReviews = catchAsync(async (req, res) => {
-    const reviews = await reviewService.getAllReviewsFromDB();
+    const reviews = await reviewService.getAllReviewsFromDB(req.query);
 
     sendResponse(res, {
         statusCode: status.CREATED,
@@ -78,7 +78,7 @@ const getReviewById = catchAsync(async (req, res) => {
         req.headers['authorization']?.split(' ')[1] ||
         req?.headers?.authorization;
 
-    const { reviewId } = req.params;    
+    const { reviewId } = req.params;
 
     const review = await reviewService.getReviewById(reviewId, token);
     sendResponse(res, {
@@ -91,42 +91,42 @@ const getReviewById = catchAsync(async (req, res) => {
 
 const approveReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
-    
+
     const approvedReview = await reviewService.approveReview(
-      reviewId,
-      req.user as UserJWTPayload
+        reviewId,
+        req.user as UserJWTPayload,
     );
-  
+
     sendResponse(res, {
-      statusCode: status.OK,
-      success: true,
-      message: 'Review approved successfully',
-      data: approvedReview,
+        statusCode: status.OK,
+        success: true,
+        message: 'Review approved successfully',
+        data: approvedReview,
     });
-  });
-  
-  const rejectReview = catchAsync(async (req, res) => {
+});
+
+const rejectReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
     const { reason } = req.body;
-  
+
     const rejectedReview = await reviewService.rejectReview(
-      reviewId,
-      reason,
-      req.user as UserJWTPayload
+        reviewId,
+        reason,
+        req.user as UserJWTPayload,
     );
-  
+
     sendResponse(res, {
-      statusCode: status.OK,
-      success: true,
-      message: 'Review rejected successfully',
-      data: rejectedReview,
+        statusCode: status.OK,
+        success: true,
+        message: 'Review rejected successfully',
+        data: rejectedReview,
     });
-  });
+});
 export const reviewController = {
     createReviewForUser,
     getAllReviews,
     updateReview,
     getReviewById,
     approveReview,
-    rejectReview
+    rejectReview,
 };
