@@ -219,7 +219,7 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
             config.ACCESS_TOKEN_SECRET as string,
         );
 
-        const hasVote = review.votes.find((r) => r.userId === review.userId);
+        const hasVote = review.votes.find((r) => r.userId === userId);
         if (hasVote) {
             voteInfo.isDownVote = hasVote.vote === 'DOWNVOTE';
             voteInfo.isUpVote = hasVote.vote === 'UPVOTE';
