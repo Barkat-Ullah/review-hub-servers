@@ -46,6 +46,7 @@ const getCommentsByReviewId = async (reviewId: string) => {
                     name: true,
                     role: true,
                     username: true,
+                    profileUrl: true,
                 },
             },
             replies: {
@@ -62,6 +63,7 @@ const getCommentsByReviewId = async (reviewId: string) => {
                             name: true,
                             role: true,
                             username: true,
+                            profileUrl: true,
                         },
                     },
                 },

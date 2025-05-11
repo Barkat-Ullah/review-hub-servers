@@ -225,6 +225,14 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
             voteInfo.isUpVote = hasVote.vote === 'UPVOTE';
         }
 
+        if (role === 'ADMIN' || userId === review.user.id) {
+            return {
+                ...reviewWithoutUnnecessary,
+                voteInfo,
+                commentCount: review._count.Comment,
+            };
+        }
+
         if (isPremiumReview && userId) {
             const { content, isLocked, preview } =
                 await reviewHelper.checkReviewAccess({
