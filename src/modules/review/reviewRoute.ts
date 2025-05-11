@@ -16,11 +16,23 @@ router.post(
     reviewController.createReviewForUser,
 );
 router.get('/', reviewController.getAllReviews);
+router.get('/:reviewId', reviewController.getReviewById);
 router.put(
     '/:reviewId',
     upload.array('imageUrls'),
     auth(User_Role.USER, User_Role.ADMIN),
     validate(reviewValidation.updateReview),
 );
+router.patch(
+    '/:reviewId/approve',
+    // auth(User_Role.ADMIN),
+    reviewController.approveReview
+  );
+  router.patch(
+    '/:reviewId/reject',
+    // auth(User_Role.ADMIN),
+    validate(reviewValidation.rejectReview),
+    reviewController.rejectReview
+  );
 
 export const reviewRoutes = router;
