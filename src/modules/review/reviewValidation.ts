@@ -20,6 +20,10 @@ const createReviewValidation = z.object({
 
     isPremium: z.boolean().default(false),
 
+    premiumPrice: z
+        .number({ required_error: 'Price is required for premium reviews' })
+        .positive('Price must be greater than 0')
+        .optional(),
     price: z
         .number({ required_error: 'Price is required for premium reviews' })
         .positive('Price must be greater than 0')
@@ -31,10 +35,12 @@ const createReviewValidation = z.object({
 const updateReview = createReviewValidation.partial();
 
 const rejectReview = z.object({
-    reason: z.string().min(10, 'Rejection reason must be at least 10 characters')
-  });
+    reason: z
+        .string()
+        .min(10, 'Rejection reason must be at least 10 characters'),
+});
 export const reviewValidation = {
     createReviewValidation,
     updateReview,
-    rejectReview
+    rejectReview,
 };
