@@ -30,22 +30,15 @@ const createComment = async (payload: Comment) => {
     return newComment;
 };
 
-const getCommentsByReviewId = async (
-    reviewId: string,
-    cursor?: string,
-    limit = 5,
-) => {
+const getCommentsByReviewId = async (reviewId: string) => {
     const comments = await prisma.comment.findMany({
         where: {
             reviewId,
             parentId: null,
         },
-        // ...(cursor && {
-        //     skip: 1,
-        //     cursor: { id: cursor },
-        // }),
-
-        take: limit,
+        orderBy: {
+            createdAt: 'desc',
+        },
         include: {
             user: {
                 select: {
