@@ -212,8 +212,7 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
         isUpVote: false,
     };
     const isPremiumReview = review.isPremium;
-
-    if (token) {
+    if (token && token !== 'undefined') {
         const { userId, role } = jwtHelpers.verifyToken(
             token,
             config.ACCESS_TOKEN_SECRET as string,
