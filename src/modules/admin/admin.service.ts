@@ -8,7 +8,11 @@ const getDashboardOverviewFromDb = async () => {
             status: 'PENDING',
         },
     });
-
+    const totalPublishedReviews = await prisma.review.count({
+      where: {
+          status: 'PUBLISHED',
+      },
+  });
     const totalPremiumReviews = await prisma.review.count({
         where: {
             isPremium: true,
@@ -29,6 +33,7 @@ const getDashboardOverviewFromDb = async () => {
         totalPremiumReviews,
         totalPayments: totalEarnings._sum.amount || 0,
         totalUsers,
+        totalPublishedReviews
     };
 };
 
@@ -61,11 +66,13 @@ export const getPopularPremiumReviewsFromDb = async () => {
       price: review.price,
       description: review.description,
       voteCount: review._count.votes,
+
     }));
   };
   
   
 export const adminService = {
     getDashboardOverviewFromDb,
-    getPopularPremiumReviewsFromDb
+    getPopularPremiumReviewsFromDb,
+    
 };

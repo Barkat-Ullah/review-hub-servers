@@ -26,6 +26,7 @@ const createReviewValidation = z.object({
         .optional(),
 
     categoryId: z.string({ required_error: 'Category ID is required' }),
+    status: z.enum(["DRAFT", "PENDING", "APPROVED", "REJECTED"]).optional(),
 });
 
 const updateReview = createReviewValidation.partial();

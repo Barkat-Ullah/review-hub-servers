@@ -35,6 +35,7 @@ type TVoteInfo = {
 
 const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
     const { role } = user || {};
+    
     const newReview = await prisma.review.create({
         data: {
             title: payload.title,
@@ -44,7 +45,7 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
             imageUrls: payload.imageUrls || [],
             isPremium: role === User_Role.ADMIN ? payload.isPremium : false,
             price: role === User_Role.ADMIN ? payload.price : null,
-            status: role === User_Role.ADMIN ? payload.status : 'DRAFT',
+            status: payload.status || 'DRAFT' ,
             user: {
                 connect: {
                     id: payload.userId,
@@ -301,12 +302,12 @@ const updateReview = async (
     return updatedReview;
 };
 const approveReview = async (reviewId: string, user: UserJWTPayload) => {
-    // if (user.role !== User_Role.ADMIN) {
-    //   throw new AppError(
-    //     status.UNAUTHORIZED,
-    //     'Only admins can approve reviews'
-    //   );
-    // }
+    if (user.role !== User_Role.ADMIN) {
+      throw new AppError(
+        status.UNAUTHORIZED,
+        'Only admins can approve reviews'
+      );
+    }
 
     const review = await prisma.review.findUnique({
         where: { id: reviewId },
@@ -336,12 +337,12 @@ const rejectReview = async (
     reason: string,
     user: UserJWTPayload,
 ) => {
-    // if (user.role !== User_Role.ADMIN) {
-    //   throw new AppError(
-    //     status.UNAUTHORIZED,
-    //     'Only admins can reject reviews'
-    //   );
-    // }
+    if (user.role !== User_Role.ADMIN) {
+      throw new AppError(
+        status.UNAUTHORIZED,
+        'Only admins can reject reviews'
+      );
+    }
 
     const review = await prisma.review.findUnique({
         where: { id: reviewId },
@@ -366,6 +367,67 @@ const rejectReview = async (
     return updatedReview;
 };
 
+const deleteReviewFromDB = async (reviewId: string, user: UserJWTPayload) => {
+    const review = await prisma.review.findUnique({
+        where: { id: reviewId },
+        include: {
+            user: true,
+        },
+    });
+
+    if (!review) {
+        throw new AppError(status.NOT_FOUND, 'Review not found');
+    }
+
+    const isOwner = review.userId === user.userId;
+    const reviewCreatorRole = review.user.role;
+    const requesterRole = user.role;
+
+    const canDelete =
+        (reviewCreatorRole === 'USER' && isOwner) ||
+        (reviewCreatorRole === 'ADMIN' && requesterRole === 'ADMIN');
+
+    if (!canDelete) {
+        throw new AppError(
+            status.UNAUTHORIZED,
+            'Not authorized to delete this review',
+        );
+    }
+
+    // First delete related records (votes and comments)
+    await prisma.vote.deleteMany({
+        where: { reviewId },
+    });
+
+    await prisma.comment.deleteMany({
+        where: { reviewId },
+    });
+
+    // Then delete the review
+    const deletedReview = await prisma.review.delete({
+        where: { id: reviewId },
+    });
+
+    return deletedReview;
+};
+
+
+const getReviewsByUserFromDB = async(userId : string) => {
+    const reviews = await prisma.review.findMany({
+        where : {
+            userId: userId
+        },
+        include: {
+            category: {
+                select: {
+                    name: true,
+                },
+            },
+        }
+    })
+    return reviews
+}
+
 export const reviewService = {
     createReviewForUser,
     getAllReviewsFromDB,
@@ -373,4 +435,6 @@ export const reviewService = {
     updateReview,
     approveReview,
     rejectReview,
+    deleteReviewFromDB,
+    getReviewsByUserFromDB
 };
