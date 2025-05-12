@@ -66,7 +66,7 @@ const checkReviewAccess = async ({
     return {
         review,
         isLocked: review.isPremium && !hasAccess,
-        content: hasAccess ? review.description : null,
+        content: hasAccess ? review.description : review.description.slice(0, 100),
         preview: review.description.slice(0, 100),
     };
 };

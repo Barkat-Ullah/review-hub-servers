@@ -215,8 +215,7 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
         isUpVote: false,
     };
     const isPremiumReview = review.isPremium;
-
-    if (token) {
+    if (token && token !== 'undefined') {
         const { userId, role } = jwtHelpers.verifyToken(
             token,
             config.ACCESS_TOKEN_SECRET as string,
@@ -226,6 +225,14 @@ const getReviewById = async (reviewId: string, token: string | undefined) => {
         if (hasVote) {
             voteInfo.isDownVote = hasVote.vote === 'DOWNVOTE';
             voteInfo.isUpVote = hasVote.vote === 'UPVOTE';
+        }
+
+        if (role === 'ADMIN' || userId === review.user.id) {
+            return {
+                ...reviewWithoutUnnecessary,
+                voteInfo,
+                commentCount: review._count.Comment,
+            };
         }
 
         if (isPremiumReview && userId) {
