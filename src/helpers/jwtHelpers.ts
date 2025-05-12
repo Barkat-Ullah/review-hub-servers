@@ -16,7 +16,7 @@ const generateToken = (payload: any, secret: Secret, expiresIn: string) => {
 const verifyToken = (token: string, secret: Secret) => {
     try {
         return jwt.verify(token, secret) as JwtPayload;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: any) {
         throw new AppError(status.FORBIDDEN, 'Invalid token');
     }

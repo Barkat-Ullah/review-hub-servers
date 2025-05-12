@@ -14,6 +14,7 @@ const createReviewForUser = catchAsync(async (req, res) => {
         );
     }
 
+    console.log(imageUrls, 'line 16');
     const payload = {
         ...req.body,
         userId,
@@ -122,6 +123,34 @@ const rejectReview = catchAsync(async (req, res) => {
         data: rejectedReview,
     });
 });
+
+const getReviewsByUser = catchAsync(async (req, res) => {
+    const { userId } = req.params;
+    const reviews = await reviewService.getReviewsByUserFromDB(userId);
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'User reviews fetched successfully',
+        data: reviews,
+    });
+});
+
+const deleteReview = catchAsync(async (req, res) => {
+    const { reviewId } = req.params;
+    const deletedReview = await reviewService.deleteReviewFromDB(
+        reviewId,
+        req.user as UserJWTPayload,
+    );
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'Review deleted successfully',
+        data: deletedReview,
+    });
+});
+
 export const reviewController = {
     createReviewForUser,
     getAllReviews,
@@ -129,4 +158,6 @@ export const reviewController = {
     getReviewById,
     approveReview,
     rejectReview,
+    getReviewsByUser,
+    deleteReview
 };

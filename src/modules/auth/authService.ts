@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
+import status from 'http-status';
 import { Secret } from 'jsonwebtoken';
 import { User } from '../../../prisma/generated/prisma-client';
 import { config } from '../../config/config';
+import AppError from '../../errors/AppError';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
 import prisma from '../../utils/prisma';
 
@@ -92,7 +94,43 @@ const loginUser = async (payload: { email: string; password: string }) => {
     };
 };
 
+const generateNewAccessToken = async (
+    refreshToken: string,
+): Promise<string> => {
+    const decoded = jwtHelpers.verifyToken(
+        refreshToken,
+        config.REFRESH_TOKEN_SECRET as string,
+    );    
+
+    const { userId } = decoded;
+
+    // checking if the user is exist
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userId,
+            isDeleted: false,
+        },
+    });
+
+    if (!user) {
+        throw new AppError(status.NOT_FOUND, 'This user is not found!');
+    }
+
+    // generating token
+    const accessToken = jwtHelpers.generateToken(
+        {
+            email: user.email,
+            role: user.role,
+            userId: user.id,
+        },
+        config.ACCESS_TOKEN_SECRET as string,
+        config.ACCESS_TOKEN_EXPIRY as string,
+    );
+    return accessToken;
+};
+
 export const UserService = {
     createUser,
     loginUser,
+    generateNewAccessToken,
 };
