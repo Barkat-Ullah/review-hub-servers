@@ -35,7 +35,7 @@ type TVoteInfo = {
 
 const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
     const { role } = user || {};
-    
+
     const newReview = await prisma.review.create({
         data: {
             title: payload.title,
@@ -45,7 +45,7 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
             imageUrls: payload.imageUrls || [],
             isPremium: role === User_Role.ADMIN ? payload.isPremium : false,
             price: role === User_Role.ADMIN ? payload.price : null,
-            status: payload.status || 'DRAFT' ,
+            status: payload.status || 'DRAFT',
             user: {
                 connect: {
                     id: payload.userId,
@@ -72,7 +72,9 @@ const getAllReviewsFromDB = async (query: TReviewQuery) => {
         limit = 12,
     } = query;
 
-    const filters: Prisma.ReviewWhereInput = {};
+    const filters: Prisma.ReviewWhereInput = {
+        status: 'PUBLISHED',
+    };
     let orderBy: Prisma.ReviewOrderByWithRelationInput = { createdAt: 'desc' };
 
     if (rating) filters.rating = Number(rating);
@@ -303,10 +305,10 @@ const updateReview = async (
 };
 const approveReview = async (reviewId: string, user: UserJWTPayload) => {
     if (user.role !== User_Role.ADMIN) {
-      throw new AppError(
-        status.UNAUTHORIZED,
-        'Only admins can approve reviews'
-      );
+        throw new AppError(
+            status.UNAUTHORIZED,
+            'Only admins can approve reviews',
+        );
     }
 
     const review = await prisma.review.findUnique({
@@ -338,10 +340,10 @@ const rejectReview = async (
     user: UserJWTPayload,
 ) => {
     if (user.role !== User_Role.ADMIN) {
-      throw new AppError(
-        status.UNAUTHORIZED,
-        'Only admins can reject reviews'
-      );
+        throw new AppError(
+            status.UNAUTHORIZED,
+            'Only admins can reject reviews',
+        );
     }
 
     const review = await prisma.review.findUnique({
@@ -411,11 +413,10 @@ const deleteReviewFromDB = async (reviewId: string, user: UserJWTPayload) => {
     return deletedReview;
 };
 
-
-const getReviewsByUserFromDB = async(userId : string) => {
+const getReviewsByUserFromDB = async (userId: string) => {
     const reviews = await prisma.review.findMany({
-        where : {
-            userId: userId
+        where: {
+            userId: userId,
         },
         include: {
             category: {
@@ -423,10 +424,10 @@ const getReviewsByUserFromDB = async(userId : string) => {
                     name: true,
                 },
             },
-        }
-    })
-    return reviews
-}
+        },
+    });
+    return reviews;
+};
 
 export const reviewService = {
     createReviewForUser,
@@ -436,5 +437,5 @@ export const reviewService = {
     approveReview,
     rejectReview,
     deleteReviewFromDB,
-    getReviewsByUserFromDB
+    getReviewsByUserFromDB,
 };
