@@ -74,7 +74,7 @@ web_modules/
 .yarn-integrity
 
 # Prisma
-# /prisma/generated
+/prisma/generated
 
 # dotenv environment variable files
 # .env
@@ -93,7 +93,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-# dist
+dist
 
 # Gatsby files
 .cache/
