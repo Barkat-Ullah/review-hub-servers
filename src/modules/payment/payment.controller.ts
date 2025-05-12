@@ -48,9 +48,21 @@ const getPaymentById = catchAsync(async (req, res) => {
         data: result,
     });
 });
+const getMyPayment = catchAsync(async (req, res) => {
+    const userId = req.user.userId;
+
+    const result = await paymentServices.getMyPayment(userId);
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: 'Successfully retrieved payment by id',
+        data: result,
+    });
+});
 export const paymentController = {
     createPayment,
     verifyPayment,
     getAllPayment,
     getPaymentById,
+    getMyPayment,
 };
