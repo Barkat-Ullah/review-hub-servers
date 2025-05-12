@@ -234,7 +234,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\PendingProjects\\review-portal-backend\\prisma\\generated\\prisma-client",
+      "value": "C:\\level-2-projects\\l2-a9-backend\\prisma\\generated\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -248,7 +248,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\PendingProjects\\review-portal-backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\level-2-projects\\l2-a9-backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -262,11 +262,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://product_review_portal_user:wvPEBudh1AEhTCDjUoZTYqOSukQpSoF5@dpg-d0aac4buibrs73bllogg-a.oregon-postgres.render.com/product_review_portal"
+        "value": null
       }
     }
   },
