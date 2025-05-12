@@ -169,6 +169,37 @@ const getAllReviewsFromDB = async (query: TReviewQuery) => {
     };
 };
 
+const getAllReviewsForAdmin = async () => {
+    const reviews = await prisma.review.findMany({
+        select: {
+            id: true,
+            title: true,
+            category: true,
+            imageUrls: true,
+            description: true,
+            reasonToUnpublish: true,
+            rating: true,
+            status: true,
+            price: true,
+            isPremium: true,
+            createdAt: true,
+            updatedAt: true,
+            votes: true,
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    profileUrl: true,
+                    email: true,
+                    username: true,
+                    role: true,
+                },
+            },
+        },
+    });
+    return reviews;
+};
+
 const getReviewById = async (reviewId: string, token: string | undefined) => {
     const review = await prisma.review.findUnique({
         where: {
@@ -432,6 +463,7 @@ const getReviewsByUserFromDB = async (userId: string) => {
 export const reviewService = {
     createReviewForUser,
     getAllReviewsFromDB,
+    getAllReviewsForAdmin,
     getReviewById,
     updateReview,
     approveReview,

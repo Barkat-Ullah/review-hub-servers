@@ -38,7 +38,7 @@ const getAllReviews = catchAsync(async (req, res) => {
     const reviews = await reviewService.getAllReviewsFromDB(req.query);
 
     sendResponse(res, {
-        statusCode: status.CREATED,
+        statusCode: status.OK,
         success: true,
         message: 'Reviews fetched successfully',
         data: reviews,
@@ -87,6 +87,17 @@ const getReviewById = catchAsync(async (req, res) => {
         success: true,
         message: 'Review fetched successfully',
         data: review,
+    });
+});
+
+const getAllReviewsForAdmin = catchAsync(async (req, res) => {
+    const reviews = await reviewService.getAllReviewsForAdmin();
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'Reviews fetched successfully',
+        data: reviews,
     });
 });
 
@@ -155,9 +166,10 @@ export const reviewController = {
     createReviewForUser,
     getAllReviews,
     updateReview,
+    getAllReviewsForAdmin,
     getReviewById,
     approveReview,
     rejectReview,
     getReviewsByUser,
-    deleteReview
+    deleteReview,
 };
