@@ -47,6 +47,7 @@ const getAllReviews = catchAsync(async (req, res) => {
 
 const updateReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
+    console.log(req.params)
 
     let imageUrls;
     if (req.files && req.files.length) {
