@@ -31,6 +31,7 @@ const verifyPayment = catchAsync(async (req, res) => {
 
 const getAllPayment = catchAsync(async (req, res) => {
     const result = await paymentServices.getAllPayments();
+
     sendResponse(res, {
         statusCode: 200,
         success: true,
