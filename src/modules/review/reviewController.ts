@@ -14,6 +14,7 @@ const createReviewForUser = catchAsync(async (req, res) => {
         );
     }
 
+    console.log(imageUrls, 'line 16');
     const payload = {
         ...req.body,
         userId,
@@ -37,7 +38,7 @@ const getAllReviews = catchAsync(async (req, res) => {
     const reviews = await reviewService.getAllReviewsFromDB(req.query);
 
     sendResponse(res, {
-        statusCode: status.CREATED,
+        statusCode: status.OK,
         success: true,
         message: 'Reviews fetched successfully',
         data: reviews,
@@ -46,6 +47,7 @@ const getAllReviews = catchAsync(async (req, res) => {
 
 const updateReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
+    console.log(req.params)
 
     let imageUrls;
     if (req.files && req.files.length) {
@@ -89,6 +91,17 @@ const getReviewById = catchAsync(async (req, res) => {
     });
 });
 
+const getAllReviewsForAdmin = catchAsync(async (req, res) => {
+    const reviews = await reviewService.getAllReviewsForAdmin();
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'Reviews fetched successfully',
+        data: reviews,
+    });
+});
+
 const approveReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
 
@@ -122,11 +135,42 @@ const rejectReview = catchAsync(async (req, res) => {
         data: rejectedReview,
     });
 });
+
+const getReviewsByUser = catchAsync(async (req, res) => {
+    const { userId } = req.params;
+    const reviews = await reviewService.getReviewsByUserFromDB(userId);
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'User reviews fetched successfully',
+        data: reviews,
+    });
+});
+
+const deleteReview = catchAsync(async (req, res) => {
+    const { reviewId } = req.params;
+    const deletedReview = await reviewService.deleteReviewFromDB(
+        reviewId,
+        req.user as UserJWTPayload,
+    );
+
+    sendResponse(res, {
+        statusCode: status.OK,
+        success: true,
+        message: 'Review deleted successfully',
+        data: deletedReview,
+    });
+});
+
 export const reviewController = {
     createReviewForUser,
     getAllReviews,
     updateReview,
+    getAllReviewsForAdmin,
     getReviewById,
     approveReview,
     rejectReview,
+    getReviewsByUser,
+    deleteReview,
 };

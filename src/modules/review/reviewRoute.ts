@@ -16,23 +16,39 @@ router.post(
     reviewController.createReviewForUser,
 );
 router.get('/', reviewController.getAllReviews);
+router.get(
+    '/admin',
+    auth(User_Role.ADMIN),
+    reviewController.getAllReviewsForAdmin,
+);
 router.get('/:reviewId', reviewController.getReviewById);
+router.get(
+    '/user/:userId',
+    auth(User_Role.USER),
+    reviewController.getReviewsByUser,
+);
+router.delete(
+    '/:reviewId',
+    auth(User_Role.USER, User_Role.ADMIN),
+    reviewController.deleteReview,
+);
 router.put(
     '/:reviewId',
     upload.array('imageUrls'),
     auth(User_Role.USER, User_Role.ADMIN),
     validate(reviewValidation.updateReview),
+    reviewController.updateReview
 );
 router.patch(
     '/:reviewId/approve',
-    // auth(User_Role.ADMIN),
-    reviewController.approveReview
-  );
-  router.patch(
+    auth(User_Role.ADMIN),
+    reviewController.approveReview,
+);
+router.patch(
     '/:reviewId/reject',
-    // auth(User_Role.ADMIN),
+    auth(User_Role.ADMIN),
     validate(reviewValidation.rejectReview),
-    reviewController.rejectReview
-  );
+    reviewController.rejectReview,
+);
 
 export const reviewRoutes = router;

@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   output   = "generated/prisma-client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -9,19 +10,19 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
+  id         String    @id @default(uuid())
+  name       String
   profileUrl String?
-  username  String    @unique
-  email     String    @unique
-  password  String
-  phone     String?   @default("N/A")
-  address   String?   @default("N/A")
-  city      String?   @default("N/A")
-  state     String?   @default("N/A")
-  postcode  String?   @default("N/A")
-  role      User_Role @default(USER)
-  isDeleted Boolean   @default(false)
+  username   String    @unique
+  email      String    @unique
+  password   String
+  phone      String?   @default("N/A")
+  address    String?   @default("N/A")
+  city       String?   @default("N/A")
+  state      String?   @default("N/A")
+  postcode   String?   @default("N/A")
+  role       User_Role @default(USER)
+  isDeleted  Boolean   @default(false)
 
   reviews Review[]
   votes   Vote[]
@@ -99,9 +100,9 @@ model Comment {
   content String
 
   // Nester comments
-  parentId  String?
-  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
-  replies   Comment[] @relation("CommentReplies")
+  parentId String?
+  parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies  Comment[] @relation("CommentReplies")
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])

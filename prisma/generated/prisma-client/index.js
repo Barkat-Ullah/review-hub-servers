@@ -246,6 +246,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -253,7 +257,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
@@ -263,17 +267,16 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgres://neondb_owner:npg_ylWKexI4nTm5@ep-wild-heart-a1p32y51-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"generated/prisma-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id         String    @id @default(uuid())\n  name       String\n  profileUrl String?\n  username   String    @unique\n  email      String    @unique\n  password   String\n  phone      String?   @default(\"N/A\")\n  address    String?   @default(\"N/A\")\n  city       String?   @default(\"N/A\")\n  state      String?   @default(\"N/A\")\n  postcode   String?   @default(\"N/A\")\n  role       User_Role @default(USER)\n  isDeleted  Boolean   @default(false)\n\n  reviews Review[]\n  votes   Vote[]\n  Comment Comment[]\n  Payment Payment[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Category {\n  id        String  @id @default(uuid())\n  name      String  @unique\n  isDeleted Boolean @default(false)\n\n  reviews Review[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"categories\")\n}\n\nmodel Review {\n  id                String        @id @default(uuid())\n  title             String\n  description       String\n  rating            Int\n  purchaseSource    String?\n  imageUrls         String[]\n  status            Review_Status @default(DRAFT)\n  isPremium         Boolean       @default(false)\n  price             Float?\n  reasonToUnpublish String?\n  premiumPrice      Float?\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  category   Category @relation(fields: [categoryId], references: [id])\n  categoryId String\n\n  votes   Vote[]\n  Comment Comment[]\n  Payment Payment[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"reviews\")\n}\n\nmodel Vote {\n  vote VoteType\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, reviewId])\n  @@map(\"votes\")\n}\n\nmodel Comment {\n  id      String @id @default(uuid())\n  content String\n\n  // Nester comments\n  parentId String?\n  parent   Comment?  @relation(\"CommentReplies\", fields: [parentId], references: [id])\n  replies  Comment[] @relation(\"CommentReplies\")\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"comments\")\n}\n\nmodel Payment {\n  id                String         @id @default(uuid())\n  amount            Float\n  transactionId     String?\n  bank_status       String?\n  sp_code           String?\n  sp_message        String?\n  method            String?\n  date_time         String?\n  transactionStatus String?\n  status            Payment_Status @default(PENDING)\n\n  // Relations\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, reviewId])\n  @@map(\"payments\")\n}\n\nenum User_Role {\n  USER\n  ADMIN\n}\n\nenum User_Status {\n  ACTIVE\n  BLOCKED\n  DELETED\n}\n\nenum Review_Status {\n  PENDING\n  DRAFT\n  PUBLISHED\n  UNPUBLISHED\n}\n\nenum Payment_Status {\n  PENDING\n  PAID\n  UNPAID\n}\n\nenum VoteType {\n  UPVOTE\n  DOWNVOTE\n  NONE\n}\n",
-  "inlineSchemaHash": "41f88d437a1ceac3704fac3a277c4e6336a9dcc9a249e56043543bbed8e91ff2",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"generated/prisma-client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id         String    @id @default(uuid())\n  name       String\n  profileUrl String?\n  username   String    @unique\n  email      String    @unique\n  password   String\n  phone      String?   @default(\"N/A\")\n  address    String?   @default(\"N/A\")\n  city       String?   @default(\"N/A\")\n  state      String?   @default(\"N/A\")\n  postcode   String?   @default(\"N/A\")\n  role       User_Role @default(USER)\n  isDeleted  Boolean   @default(false)\n\n  reviews Review[]\n  votes   Vote[]\n  Comment Comment[]\n  Payment Payment[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Category {\n  id        String  @id @default(uuid())\n  name      String  @unique\n  isDeleted Boolean @default(false)\n\n  reviews Review[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"categories\")\n}\n\nmodel Review {\n  id                String        @id @default(uuid())\n  title             String\n  description       String\n  rating            Int\n  purchaseSource    String?\n  imageUrls         String[]\n  status            Review_Status @default(DRAFT)\n  isPremium         Boolean       @default(false)\n  price             Float?\n  reasonToUnpublish String?\n  premiumPrice      Float?\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  category   Category @relation(fields: [categoryId], references: [id])\n  categoryId String\n\n  votes   Vote[]\n  Comment Comment[]\n  Payment Payment[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"reviews\")\n}\n\nmodel Vote {\n  vote VoteType\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, reviewId])\n  @@map(\"votes\")\n}\n\nmodel Comment {\n  id      String @id @default(uuid())\n  content String\n\n  // Nester comments\n  parentId String?\n  parent   Comment?  @relation(\"CommentReplies\", fields: [parentId], references: [id])\n  replies  Comment[] @relation(\"CommentReplies\")\n\n  // Relations\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"comments\")\n}\n\nmodel Payment {\n  id                String         @id @default(uuid())\n  amount            Float\n  transactionId     String?\n  bank_status       String?\n  sp_code           String?\n  sp_message        String?\n  method            String?\n  date_time         String?\n  transactionStatus String?\n  status            Payment_Status @default(PENDING)\n\n  // Relations\n  review   Review @relation(fields: [reviewId], references: [id])\n  reviewId String\n\n  user   User   @relation(fields: [userId], references: [id])\n  userId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, reviewId])\n  @@map(\"payments\")\n}\n\nenum User_Role {\n  USER\n  ADMIN\n}\n\nenum User_Status {\n  ACTIVE\n  BLOCKED\n  DELETED\n}\n\nenum Review_Status {\n  PENDING\n  DRAFT\n  PUBLISHED\n  UNPUBLISHED\n}\n\nenum Payment_Status {\n  PENDING\n  PAID\n  UNPAID\n}\n\nenum VoteType {\n  UPVOTE\n  DOWNVOTE\n  NONE\n}\n",
+  "inlineSchemaHash": "39f40a4ac46735b3bc9fda2f166b8f8545a44fbd9fe1e5ce5b322965f75e5a8b",
   "copyEngine": true
 }
 
@@ -314,6 +317,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "prisma/generated/prisma-client/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-3.0.x.so.node");
+path.join(process.cwd(), "prisma/generated/prisma-client/libquery_engine-rhel-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/prisma-client/schema.prisma")
