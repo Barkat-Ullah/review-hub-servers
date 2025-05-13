@@ -37,6 +37,7 @@ router.put(
     upload.array('imageUrls'),
     auth(User_Role.USER, User_Role.ADMIN),
     validate(reviewValidation.updateReview),
+    reviewController.updateReview
 );
 router.patch(
     '/:reviewId/approve',
