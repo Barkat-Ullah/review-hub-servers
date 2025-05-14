@@ -35,7 +35,6 @@ type TVoteInfo = {
 
 const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
     const { role } = user || {};
-
     const newReview = await prisma.review.create({
         data: {
             title: payload.title,
@@ -44,6 +43,7 @@ const createReviewForUser = async (payload: Review, user: UserJWTPayload) => {
             purchaseSource: payload.purchaseSource,
             imageUrls: payload.imageUrls || [],
             isPremium: role === User_Role.ADMIN ? payload.isPremium : false,
+            premiumPrice: role === User_Role.ADMIN ? payload.premiumPrice : 10,
             price: role === User_Role.ADMIN ? payload.price : null,
             status: payload.status || 'DRAFT',
             user: {

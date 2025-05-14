@@ -183,10 +183,24 @@ const getPaymentByIdFromDB = async (id: string) => {
     });
     return result;
 };
+const getMyPayment = async (userId: string) => {
+    const result = await prisma.payment.findMany({
+        where: {
+            userId,
+            status: Payment_Status.PAID,
+        },
+        include: {
+            review: true,
+            user: true,
+        },
+    });
+    return result;
+};
 
 export const paymentServices = {
     createPayment,
     verifyPayment,
     getAllPayments,
     getPaymentByIdFromDB,
+    getMyPayment,
 };
