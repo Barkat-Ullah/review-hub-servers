@@ -1,3 +1,4 @@
+import { Payment_Status } from '../../../prisma/generated/prisma-client';
 import { uploadToCloudinary } from '../../utils/cloudinary';
 import prisma from '../../utils/prisma';
 
@@ -56,7 +57,7 @@ const checkReviewAccess = async ({
             where: {
                 userId,
                 reviewId,
-                status: 'PAID',
+                status: Payment_Status.PAID,
             },
         });
 
@@ -66,7 +67,9 @@ const checkReviewAccess = async ({
     return {
         review,
         isLocked: review.isPremium && !hasAccess,
-        content: hasAccess ? review.description : review.description.slice(0, 100),
+        content: hasAccess
+            ? review.description
+            : review.description.slice(0, 100),
         preview: review.description.slice(0, 100),
     };
 };

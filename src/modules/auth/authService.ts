@@ -42,7 +42,6 @@ const createUser = async (payload: User) => {
             role: true,
         },
     });
-    console.log('result', result);
     return result;
 };
 
@@ -62,8 +61,6 @@ const loginUser = async (payload: { email: string; password: string }) => {
         payload.password,
         userData.password,
     );
-
-    // console.log(isCorrectPassword);
 
     if (!isCorrectPassword) {
         throw new Error('Your Password is incorrect..');
@@ -100,7 +97,7 @@ const generateNewAccessToken = async (
     const decoded = jwtHelpers.verifyToken(
         refreshToken,
         config.REFRESH_TOKEN_SECRET as string,
-    );    
+    );
 
     const { userId } = decoded;
 

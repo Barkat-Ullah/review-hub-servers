@@ -7,6 +7,8 @@ import { reviewRoutes } from '../modules/review/reviewRoute';
 import { userRoutes } from '../modules/user/userRoute';
 import { PaymentRoutes } from '../modules/payment/payment.route';
 import { voteRoutes } from '../modules/vote/voteRoute';
+import { testimonialRoutes } from '../modules/testimonial/tetimonial.routes';
+import { ContactMessageRoutes } from '../modules/contactMessage/contactMessage.routes';
 
 const router = Router();
 
@@ -42,6 +44,14 @@ const moduleRoutes = [
     {
         path: '/admin/dashboard-overview',
         route: AdminRoutes,
+    },
+    {
+        path: '/testimonial',
+        route: testimonialRoutes,
+    },
+    {
+        path: '/contact',
+        route: ContactMessageRoutes,
     },
 ];
 

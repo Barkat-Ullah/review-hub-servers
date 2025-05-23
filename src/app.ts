@@ -6,6 +6,7 @@ import { corsOptions } from './config/config';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import notFound from './middlewares/notFound';
 import AllRoutes from './routes/route';
+// import { seedUser } from './modules/payment/seed';
 
 export const app = express();
 

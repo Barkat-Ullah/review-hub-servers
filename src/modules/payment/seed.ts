@@ -7,11 +7,11 @@ import prisma from '../../utils/prisma';
 export const seedUser = async () => {
     try {
         const adminUser = {
-            email: 'user@example.com',
+            email: 'admin@example.com',
             password: '123456',
-            name: 'user',
-            username: 'user',
-            role: User_Role.USER,
+            name: 'admin',
+            username: 'admin',
+            role: User_Role.ADMIN,
             phone: 'N/A',
             address: 'N/A',
             city: 'N/A',
