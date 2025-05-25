@@ -1,4 +1,4 @@
-import { Payment_Status } from '../../../prisma/generated/prisma-client';
+import { Payment_Status } from '../../../generated/prisma';
 import { uploadToCloudinary } from '../../utils/cloudinary';
 import prisma from '../../utils/prisma';
 

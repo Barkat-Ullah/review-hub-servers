@@ -14,7 +14,7 @@ const createReviewForUser = catchAsync(async (req, res) => {
         );
     }
 
-    console.log(imageUrls, 'line 16');
+    // console.log(imageUrls, 'line 16');
     const payload = {
         ...req.body,
         userId,
@@ -47,7 +47,7 @@ const getAllReviews = catchAsync(async (req, res) => {
 
 const updateReview = catchAsync(async (req, res) => {
     const { reviewId } = req.params;
-    console.log(req.params)
+    console.log(req.params);
 
     let imageUrls;
     if (req.files && req.files.length) {

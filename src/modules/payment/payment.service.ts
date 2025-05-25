@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Payment_Status } from '../../../prisma/generated/prisma-client';
-
+import { Payment_Status } from '../../../generated/prisma';
 import prisma from '../../utils/prisma';
 import { paymentUtils } from './payment.utils';
 
@@ -10,7 +8,6 @@ interface IPaymentData {
 }
 
 const createPayment = async (paymentData: IPaymentData, client_ip: string) => {
-    console.log(paymentData);
     const { userId, reviewId } = paymentData;
     //  Step 1: Validate user
     // Step 2: Validate review

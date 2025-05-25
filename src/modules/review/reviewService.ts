@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import status from 'http-status';
-import {
-    Prisma,
-    Review,
-    User_Role,
-} from '../../../prisma/generated/prisma-client';
+import { Prisma, Review, User_Role } from '../../../generated/prisma';
 import { config } from '../../config/config';
 import AppError from '../../errors/AppError';
 import { jwtHelpers } from '../../helpers/jwtHelpers';

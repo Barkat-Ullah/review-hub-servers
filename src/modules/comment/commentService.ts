@@ -1,7 +1,8 @@
 import status from 'http-status';
-import { Comment } from '../../../prisma/generated/prisma-client';
+
 import AppError from '../../errors/AppError';
 import prisma from '../../utils/prisma';
+import { Comment } from '../../../generated/prisma';
 
 const createComment = async (payload: Comment) => {
     if (payload.parentId) {

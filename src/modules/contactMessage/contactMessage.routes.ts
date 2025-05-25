@@ -7,9 +7,9 @@ import {
 } from './contactMessage.controller';
 
 const router = express.Router();
-
-router.post('/', createMessage);
 router.get('/', getMessages);
+router.post('/', createMessage);
+
 router.get('/:id', getMessageById);
 router.delete('/:id', deleteMessage);
 

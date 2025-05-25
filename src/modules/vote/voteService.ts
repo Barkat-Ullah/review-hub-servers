@@ -1,7 +1,8 @@
 import status from 'http-status';
-import { VoteType } from '../../../prisma/generated/prisma-client';
+
 import AppError from '../../errors/AppError';
 import prisma from '../../utils/prisma';
+import { VoteType } from '../../../generated/prisma';
 
 interface IVotePayload {
     reviewId: string;

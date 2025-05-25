@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import status from 'http-status';
-import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import jwt, { JwtPayload, Secret, SignOptions } from 'jsonwebtoken';
 import AppError from '../errors/AppError';
 
 const generateToken = (payload: any, secret: Secret, expiresIn: string) => {
     const token = jwt.sign(payload, secret, {
         algorithm: 'HS256',
         expiresIn,
-    });
+    } as SignOptions);
 
     return token;
 };

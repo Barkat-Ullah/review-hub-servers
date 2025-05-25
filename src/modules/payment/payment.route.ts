@@ -1,7 +1,7 @@
 import express from 'express';
 import { paymentController } from './payment.controller';
 import auth from '../../middlewares/auth';
-import { User_Role } from '../../../prisma/generated/prisma-client';
+import { User_Role } from '../../../generated/prisma';
 
 const router = express.Router();
 

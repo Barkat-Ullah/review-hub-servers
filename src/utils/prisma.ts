@@ -1,4 +1,5 @@
-import { PrismaClient } from '../../prisma/generated/prisma-client';
+import { PrismaClient } from '../../generated/prisma/index';
+
 const prisma = new PrismaClient();
 
 export default prisma;

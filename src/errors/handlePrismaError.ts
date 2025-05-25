@@ -1,4 +1,6 @@
-import { Prisma } from '../../prisma/generated/prisma-client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Prisma } from '../../generated/prisma';
 import { TErrorSources, TGenericErrorResponse } from '../interface/error';
 
 const handlePrismaError = (

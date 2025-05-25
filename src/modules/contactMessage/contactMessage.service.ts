@@ -1,7 +1,4 @@
-import {
-    ContactCategory,
-    ContactPriority,
-} from '../../../prisma/generated/prisma-client';
+import { ContactCategory, ContactPriority } from '../../../generated/prisma';
 import prisma from '../../utils/prisma';
 
 export const createContactMessage = async (payload: {

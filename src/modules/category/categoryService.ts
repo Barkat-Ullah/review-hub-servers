@@ -1,7 +1,8 @@
 import status from 'http-status';
-import { Category } from '../../../prisma/generated/prisma-client';
+
 import AppError from '../../errors/AppError';
 import prisma from '../../utils/prisma';
+import { Category } from '../../../generated/prisma';
 
 const createCategoryInDB = async (payload: Category) => {
     const existCategory = await prisma.category.findUnique({

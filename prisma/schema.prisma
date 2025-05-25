@@ -1,7 +1,6 @@
 generator client {
-  provider      = "prisma-client-js"
-  output        = "generated/prisma-client"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -10,41 +9,37 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  name       String
-  profileUrl String?
-  username   String    @unique
-  email      String    @unique
-  password   String
-  phone      String?   @default("N/A")
-  address    String?   @default("N/A")
-  city       String?   @default("N/A")
-  state      String?   @default("N/A")
-  postcode   String?   @default("N/A")
-  role       User_Role @default(USER)
-  isDeleted  Boolean   @default(false)
-
-  reviews      Review[]
-  votes        Vote[]
+  id           String        @id @default(uuid())
+  name         String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  role         User_Role     @default(USER)
+  username     String        @unique
+  isDeleted    Boolean       @default(false)
+  address      String?       @default("N/A")
+  city         String?       @default("N/A")
+  phone        String?       @default("N/A")
+  postcode     String?       @default("N/A")
+  state        String?       @default("N/A")
+  profileUrl   String?
   Comment      Comment[]
   Payment      Payment[]
+  reviews      Review[]
   testimonials Testimonial[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  votes        Vote[]
 
   @@map("users")
 }
 
 model Category {
-  id        String  @id @default(uuid())
-  name      String  @unique
-  isDeleted Boolean @default(false)
-
-  reviews Review[]
-
+  id        String   @id @default(uuid())
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  reviews   Review[]
 
   @@map("categories")
 }
@@ -57,88 +52,69 @@ model Review {
   purchaseSource    String?
   imageUrls         String[]
   status            Review_Status @default(PENDING)
+  userId            String
+  categoryId        String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
   isPremium         Boolean       @default(false)
   price             Float?
   reasonToUnpublish String?
   premiumPrice      Float?
-
-  // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
-
-  votes   Vote[]
-  Comment Comment[]
-  Payment Payment[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  Comment           Comment[]
+  Payment           Payment[]
+  category          Category      @relation(fields: [categoryId], references: [id])
+  user              User          @relation(fields: [userId], references: [id])
+  votes             Vote[]
 
   @@map("reviews")
 }
 
 model Vote {
-  vote VoteType
-
-  // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  review   Review @relation(fields: [reviewId], references: [id])
-  reviewId String
-
+  userId    String
+  reviewId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  vote      VoteType
+  review    Review   @relation(fields: [reviewId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, reviewId])
   @@map("votes")
 }
 
 model Comment {
-  id      String @id @default(uuid())
-  content String
-
-  // Nester comments
-  parentId String?
-  parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
-  replies  Comment[] @relation("CommentReplies")
-
-  // Relations
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  review   Review @relation(fields: [reviewId], references: [id])
-  reviewId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(uuid())
+  content   String
+  userId    String
+  reviewId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  parentId  String?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  review    Review    @relation(fields: [reviewId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
 
   @@map("comments")
 }
 
 model Payment {
   id                String         @id @default(uuid())
-  amount            Float
   transactionId     String?
+  status            Payment_Status @default(PENDING)
+  reviewId          String
+  userId            String
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  amount            Float
   bank_status       String?
+  date_time         String?
+  method            String?
   sp_code           String?
   sp_message        String?
-  method            String?
-  date_time         String?
   transactionStatus String?
-  status            Payment_Status @default(PENDING)
-
-  // Relations
-  review   Review @relation(fields: [reviewId], references: [id])
-  reviewId String
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  review            Review         @relation(fields: [reviewId], references: [id])
+  user              User           @relation(fields: [userId], references: [id])
 
   @@unique([userId, reviewId])
   @@map("payments")
@@ -152,9 +128,8 @@ model Testimonial {
   recommendation Boolean
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id])
 
   @@map("testimonials")
 }
@@ -168,9 +143,9 @@ model ContactMessage {
   subject   String?
   message   String
   priority  ContactPriority
-  status    SupportStatus   @default(PENDING)
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
+  status    SupportStatus   @default(PENDING)
 }
 
 enum SupportStatus {
@@ -198,12 +173,6 @@ enum ContactPriority {
 enum User_Role {
   USER
   ADMIN
-}
-
-enum User_Status {
-  ACTIVE
-  BLOCKED
-  DELETED
 }
 
 enum Review_Status {

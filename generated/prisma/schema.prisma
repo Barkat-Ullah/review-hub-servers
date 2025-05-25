@@ -1,0 +1,194 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(uuid())
+  name         String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  role         User_Role     @default(USER)
+  username     String        @unique
+  isDeleted    Boolean       @default(false)
+  address      String?       @default("N/A")
+  city         String?       @default("N/A")
+  phone        String?       @default("N/A")
+  postcode     String?       @default("N/A")
+  state        String?       @default("N/A")
+  profileUrl   String?
+  Comment      Comment[]
+  Payment      Payment[]
+  reviews      Review[]
+  testimonials Testimonial[]
+  votes        Vote[]
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  reviews   Review[]
+
+  @@map("categories")
+}
+
+model Review {
+  id                String        @id @default(uuid())
+  title             String
+  description       String
+  rating            Int
+  purchaseSource    String?
+  imageUrls         String[]
+  status            Review_Status @default(PENDING)
+  userId            String
+  categoryId        String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  isPremium         Boolean       @default(false)
+  price             Float?
+  reasonToUnpublish String?
+  premiumPrice      Float?
+  Comment           Comment[]
+  Payment           Payment[]
+  category          Category      @relation(fields: [categoryId], references: [id])
+  user              User          @relation(fields: [userId], references: [id])
+  votes             Vote[]
+
+  @@map("reviews")
+}
+
+model Vote {
+  userId    String
+  reviewId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vote      VoteType
+  review    Review   @relation(fields: [reviewId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, reviewId])
+  @@map("votes")
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  content   String
+  userId    String
+  reviewId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  parentId  String?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  review    Review    @relation(fields: [reviewId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@map("comments")
+}
+
+model Payment {
+  id                String         @id @default(uuid())
+  transactionId     String?
+  status            Payment_Status @default(PENDING)
+  reviewId          String
+  userId            String
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  amount            Float
+  bank_status       String?
+  date_time         String?
+  method            String?
+  sp_code           String?
+  sp_message        String?
+  transactionStatus String?
+  review            Review         @relation(fields: [reviewId], references: [id])
+  user              User           @relation(fields: [userId], references: [id])
+
+  @@unique([userId, reviewId])
+  @@map("payments")
+}
+
+model Testimonial {
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  rating         Int
+  recommendation Boolean
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id])
+
+  @@map("testimonials")
+}
+
+model ContactMessage {
+  id        String          @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  category  ContactCategory
+  subject   String?
+  message   String
+  priority  ContactPriority
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  status    SupportStatus   @default(PENDING)
+}
+
+enum SupportStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum ContactCategory {
+  GENERAL
+  SUPPORT
+  BUG_REPORT
+  PARTNERSHIP
+  FEATURE_REQUEST
+}
+
+enum ContactPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum User_Role {
+  USER
+  ADMIN
+}
+
+enum Review_Status {
+  PENDING
+  PUBLISHED
+  UNPUBLISHED
+}
+
+enum Payment_Status {
+  PENDING
+  PAID
+  UNPAID
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+  NONE
+}

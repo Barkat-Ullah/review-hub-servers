@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { User_Role } from '../../../prisma/generated/prisma-client';
 import auth from '../../middlewares/auth';
 import { upload } from '../../middlewares/multer';
 import { validate } from '../../middlewares/validate';
 import { reviewController } from './reviewController';
 import { reviewValidation } from './reviewValidation';
+import { User_Role } from '../../../generated/prisma';
 
 const router = Router();
 
@@ -37,7 +37,7 @@ router.put(
     upload.array('imageUrls'),
     auth(User_Role.USER, User_Role.ADMIN),
     validate(reviewValidation.updateReview),
-    reviewController.updateReview
+    reviewController.updateReview,
 );
 router.patch(
     '/:reviewId/approve',

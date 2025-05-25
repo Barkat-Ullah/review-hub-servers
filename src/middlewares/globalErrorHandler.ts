@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import status from 'http-status';
 
 const globalErrorHandler = (
@@ -6,8 +6,6 @@ const globalErrorHandler = (
     err: any,
     req: Request,
     res: Response,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    next: NextFunction,
 ) => {
     // console.log(err);
     res.status(err.statusCode ?? status.INTERNAL_SERVER_ERROR).json({
